@@ -11,7 +11,7 @@ That project is a Jekyll site but has teh first version of this in a subfolder (
 
 The new (DevOps and Azure hosted) site is now at https://davidjones.sportronics.com.au
 
-##With this app you can:
+## With this app you can:
 - Convert a Word document to MD
 - Convert an Html document to MD
 - Download a web page and convert it to MD
