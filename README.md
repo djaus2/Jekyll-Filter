@@ -1,5 +1,7 @@
 # Jekyll Filter
-A Windows Forms app to get web pages and Word documents into a Jekyll Blog site and Markdown. Uses Pandoc.
+A Windows Forms app to get web pages and Word documents into a Jekyll Blog site and Markdown. 
+
+Needs [Pandoc](http://pandoc.org) to be installed
 
 This project was started as a component of the repository https://github.com/djaus2/djaus2.github.io.
 
