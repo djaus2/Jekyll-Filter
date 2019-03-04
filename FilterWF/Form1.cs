@@ -693,9 +693,10 @@ namespace FilterWF
                     string filebase = Path.GetFileNameWithoutExtension(fileName);
                     string filebasedotted = filebase.Replace(" ", "-");
                     string targfile = filebasedotted + ".docx";
-                    System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile),true);
+                    targfile = Path.Combine(fileFolder, targfile);
+                    System.IO.File.Copy(fileName,targfile ,true);
                     MessageBox.Show(fileContent, "Got File Content: " + file, MessageBoxButtons.OK);
-                    PandocUtil.Word2MD(true,false, Program.BlogSiteRoot, fileFolder, targfile, filebase);
+                    PandocUtil.Word2MD(true, false, Program.BlogSiteRoot, fileFolder, targfile);//, filebase);
                     chkJustrDoneConversion.Checked = true;
                 }
                 
@@ -835,7 +836,7 @@ namespace FilterWF
             string fileFolder = Program.BlogSiteRoot;
             fileFolder = Path.Combine(fileFolder, "_html");
             WorkFolder = fileFolder;
-            PandocUtil.Word2MD(false,false,  Program.BlogSiteRoot, fileFolder, html, title);
+            PandocUtil.Word2MD(false, false, Program.BlogSiteRoot, fileFolder, html);//, title);
             chkJustrDoneConversion.Checked = true;
 
         }
@@ -866,7 +867,7 @@ namespace FilterWF
                     string targfile = filebasedotted + ".html";
                     System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
                     MessageBox.Show( "Got File Content: " + file, fileContent, MessageBoxButtons.OK);
-                    PandocUtil.Word2MD(false, true, Program.BlogSiteRoot, fileFolder, targfile, filebase);
+                    PandocUtil.Word2MD(false, true, Program.BlogSiteRoot, fileFolder, targfile);//, filebase);
                     chkJustrDoneConversion.Checked = true;
                     
                 }

@@ -40,6 +40,8 @@ namespace FilterWF
         public static string categories { get; set; } = "";
 
         public static string   WorkingDirectory { get; set; } = "";
+
+        public static string BatDir { get; set; } = "";
         public static string BlogSiteRoot { get; set; } = "";
         public static string tbSeperator_Text { get;
             set; } = "@@@";
@@ -59,6 +61,7 @@ namespace FilterWF
 
 
             WorkingDirectory = Environment.CurrentDirectory;
+            BatDir = Path.Combine(WorkingDirectory, "Bat");
             // or: Directory.GetCurrentDirectory() gives the same result
 
             // This will get the current PROJECT directory

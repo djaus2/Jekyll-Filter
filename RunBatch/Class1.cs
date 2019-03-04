@@ -11,25 +11,30 @@ namespace RunBatch
 {
     public static  class PandocUtil
     {
-        public static void Word2MD(bool isword, bool ishtmlNothpp, string blogSiteRoot, string pwd,string filename, string title)
+        public static void Word2MD(bool isword, bool ishtmlNothpp, string blogSiteRoot, string batDir, string filebasename)
         {
-            string paramz = filename  + " " +  title;
-            
-            //string workingDir = blogSiteRoot;
+            //string paramz = filebasename  + " " +  title;
+
+            string batchFilePath = Path.Combine(batDir, "bat");
+            string filePath = blogSiteRoot;
             string cmd = "";
-            blogSiteRoot = Path.Combine(blogSiteRoot, "bin");
+            //batDir = Path.Combine(batDir, "bin");
             if (isword)
             {
                 if (!ishtmlNothpp)
                 {
                     //workingDir = Path.Combine(workingDir, "docx");
-                    blogSiteRoot = Path.Combine(blogSiteRoot, "wrd2md.bat");
-                    cmd = "\"" + blogSiteRoot + " " + paramz + "\"";
+                    batchFilePath = Path.Combine(batchFilePath, "wrd2md.bat");
+                    filePath = Path.Combine(blogSiteRoot,"_word");
+                    filePath = Path.Combine(filePath,filebasename);
+                    cmd = "\"" + batchFilePath + " " + filePath + "\"";
                 }
                 else
                 {
-                    blogSiteRoot = Path.Combine(blogSiteRoot, "md2html.bat");
-                    cmd = "\"" + blogSiteRoot + " " + paramz + "\"";
+                    //batchFilePath = Path.Combine(batchFilePath, "md2html.bat");
+                    //filePath = Path.Combine("_html");
+                    //filePath = Path.Combine(filebasename);
+                    //cmd = "\"" + batchFilePath + " " + filePath + "\"";
                 }
             }
             else //HTML2MD
@@ -37,18 +42,22 @@ namespace RunBatch
                 if (!ishtmlNothpp)
                 {
                     //orkingDir = Path.Combine(workingDir, "docx");
-                    blogSiteRoot = Path.Combine(blogSiteRoot, "http2md.bat");
-                    cmd = "\"" + blogSiteRoot + " " + paramz + "\"";
+                    batchFilePath = Path.Combine(batchFilePath, "http2md.bat");
+                    filePath = Path.Combine(blogSiteRoot, "_html");
+                    filePath = Path.Combine(filePath, filebasename);
+                    cmd = "\"" + batchFilePath + " " + filePath + "\"";
                 }
                 else
                 {
-                    blogSiteRoot = Path.Combine(blogSiteRoot, "html2md.bat");
-                    cmd = "\"" + blogSiteRoot + " " + paramz + "\"";
+                    batchFilePath = Path.Combine(batchFilePath, "html2md.bat");
+                    filePath = Path.Combine(blogSiteRoot, "_html");
+                    filePath = Path.Combine(filePath, filebasename);
+                    cmd = "\"" + batchFilePath + " " + filePath + "\"";
                 }
             }
             
 
-            Directory.SetCurrentDirectory(pwd);
+            //Directory.SetCurrentDirectory(pwd);
 
             //var processInfo = new ProcessStartInfo("cmd.exe", "/c" + "\"C:\\Program Files (x86)\AssaultCube_v1.1.0.4\assaultcube.bat\"");
             var processInfo = new ProcessStartInfo("cmd.exe", "/c" + cmd);
@@ -74,11 +83,11 @@ namespace RunBatch
                 MessageBox.Show( output ,"Info", MessageBoxButtons.OK); 
         }
 
-        public static void MD2Html( string blogSiteRoot, string pwd, string filename, string title)
+        public static void Http2MD(string batDir, string url, string targetPath)
         {
-            string of = Path.Combine(blogSiteRoot, pwd);
-            of = Path.Combine(of, title);
-            string paramz = filename + " " + of;
+            //string of = Path.Combine(blogSiteRoot, pwd);
+            //of = Path.Combine(of, title);
+            string paramz = "\"" + url + "\"" + " " + "\"" + targetPath + "\"";
 
 
 
@@ -86,12 +95,59 @@ namespace RunBatch
             string cmd = "";
             //Directory.SetCurrentDirectory(Path.Combine(blogSiteRoot, pwd));
 
-            
+            string batchFilePath = Path.Combine(batDir, "bat");
 
-            blogSiteRoot = Path.Combine(blogSiteRoot, "bin");
+            batchFilePath = Path.Combine(batchFilePath, "http2md.bat");
+            cmd = "\"" + batchFilePath + " " + paramz + "\"";
 
-            blogSiteRoot = Path.Combine(blogSiteRoot, "md2html.bat");
-            cmd = "\"" + blogSiteRoot + " " + paramz + "\"";
+
+
+
+            //var processInfo = new ProcessStartInfo("cmd.exe", "/c" + "\"C:\\Program Files (x86)\AssaultCube_v1.1.0.4\assaultcube.bat\"");
+            var processInfo = new ProcessStartInfo("cmd.exe", "/c" + cmd);
+
+            processInfo.CreateNoWindow = true;
+
+            processInfo.UseShellExecute = false;
+
+            processInfo.RedirectStandardError = true;
+            processInfo.RedirectStandardOutput = true;
+
+            var process = Process.Start(processInfo);
+
+            process.Start();
+
+            process.WaitForExit();
+
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+            if (error != "")
+            {
+                //MessageBox.Show(output, "Info", MessageBoxButtons.OK);
+                MessageBox.Show(error, "Error", MessageBoxButtons.OK);
+            }
+            else
+            {
+
+            }
+        }
+
+        public static void MD2Html( string batDir, string srcfilename, string targetPath, string title)
+        {
+            //string of = Path.Combine(blogSiteRoot, pwd);
+            //of = Path.Combine(of, title);
+            string paramz = "\"" + srcfilename + "\"" + " " + "\"" + targetPath + "\"" + " " + title;
+
+
+
+            //string workingDir = blogSiteRoot;
+            string cmd = "";
+            //Directory.SetCurrentDirectory(Path.Combine(blogSiteRoot, pwd));
+
+            string batchFilePath = Path.Combine(batDir, "bat");
+
+            batchFilePath = Path.Combine(batchFilePath, "md2html.bat");
+            cmd = "\"" + batchFilePath + " " + paramz + "\"";
 
 
            
@@ -116,7 +172,7 @@ namespace RunBatch
             string error = process.StandardError.ReadToEnd();
             if (error != "")
             {
-                MessageBox.Show(output, "Info", MessageBoxButtons.OK);
+                //MessageBox.Show(output, "Info", MessageBoxButtons.OK);
                 MessageBox.Show(error, "Error", MessageBoxButtons.OK);
             }
             else

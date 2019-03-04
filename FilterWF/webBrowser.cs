@@ -51,6 +51,7 @@ namespace FilterWF
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             Cursor.Current = oldCursor;
+            MDIParent1.SetStatus("Done");
         }
 
         private void button2_Click(object sender, EventArgs e)

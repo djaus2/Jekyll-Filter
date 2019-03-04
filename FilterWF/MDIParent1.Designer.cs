@@ -65,9 +65,7 @@
             this.toolStripSeparator77 = new System.Windows.Forms.ToolStripSeparator();
             this.firstItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearAllWorkFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearhtmlFollderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cleardraftFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.addACategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeACategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,7 +97,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.cleardraftFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -384,7 +381,7 @@
             this.printSetupToolStripMenuItem.Name = "printSetupToolStripMenuItem";
             this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.printSetupToolStripMenuItem.Text = "Download and Convert from @Url";
-            this.printSetupToolStripMenuItem.Click += new System.EventHandler(this.Httpo2MD_Click);
+            this.printSetupToolStripMenuItem.Click += new System.EventHandler(this.Http2MD_Click);
             // 
             // applyFiltersToolStripMenuItem
             // 
@@ -407,9 +404,6 @@
             // toolsMenu
             // 
             this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearAllWorkFoldersToolStripMenuItem,
-            this.optionsToolStripMenuItem,
-            this.clearhtmlFollderToolStripMenuItem,
             this.cleardraftFolderToolStripMenuItem,
             this.toolStripSeparator9,
             this.addACategoryToolStripMenuItem,
@@ -421,26 +415,12 @@
             this.toolsMenu.Size = new System.Drawing.Size(47, 20);
             this.toolsMenu.Text = "&Tools";
             // 
-            // clearAllWorkFoldersToolStripMenuItem
+            // cleardraftFolderToolStripMenuItem
             // 
-            this.clearAllWorkFoldersToolStripMenuItem.Name = "clearAllWorkFoldersToolStripMenuItem";
-            this.clearAllWorkFoldersToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.clearAllWorkFoldersToolStripMenuItem.Text = "Clear all work folders";
-            this.clearAllWorkFoldersToolStripMenuItem.Click += new System.EventHandler(this.clearAllWorkFoldersToolStripMenuItem_Click);
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.optionsToolStripMenuItem.Text = "Clear _word folder";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.clearwordFolderStripMenuItem_Click);
-            // 
-            // clearhtmlFollderToolStripMenuItem
-            // 
-            this.clearhtmlFollderToolStripMenuItem.Name = "clearhtmlFollderToolStripMenuItem";
-            this.clearhtmlFollderToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.clearhtmlFollderToolStripMenuItem.Text = "Clear _html follder";
-            this.clearhtmlFollderToolStripMenuItem.Click += new System.EventHandler(this.clearhtmlFolderToolStripMenuItem_Click);
+            this.cleardraftFolderToolStripMenuItem.Name = "cleardraftFolderToolStripMenuItem";
+            this.cleardraftFolderToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.cleardraftFolderToolStripMenuItem.Text = "Clear _drafts folder";
+            this.cleardraftFolderToolStripMenuItem.Click += new System.EventHandler(this.cleardraftFolderToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -681,13 +661,6 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // cleardraftFolderToolStripMenuItem
-            // 
-            this.cleardraftFolderToolStripMenuItem.Name = "cleardraftFolderToolStripMenuItem";
-            this.cleardraftFolderToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.cleardraftFolderToolStripMenuItem.Text = "Clear _drafts folder";
-            this.cleardraftFolderToolStripMenuItem.Click += new System.EventHandler(this.cleardraftFolderToolStripMenuItem_Click);
-            // 
             // MDIParent1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,7 +721,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolBarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statusBarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsMenu;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowsMenu;
         private System.Windows.Forms.ToolStripMenuItem newWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cascadeToolStripMenuItem;
@@ -767,8 +739,6 @@
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ToolStripMenuItem reloadStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearhtmlFollderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearAllWorkFoldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoGenerateATopiscPagesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applyFiltersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addACategoryToolStripMenuItem;

@@ -14,9 +14,10 @@ namespace FilterWF
 {
     public partial class MDIParent1 : Form
     {
+        
         private int childFormNumber = 0;
 
-        private static MDIParent1  mdiparent =null;
+        public static MDIParent1  mdiparent =null;
 
         public MDIParent1()
         {
@@ -301,7 +302,9 @@ namespace FilterWF
         //New
         private void Wrd2MD_Click(object sender, EventArgs e)
         {
-            var fileContent = string.Empty;
+           
+
+                var fileContent = string.Empty;
             var filePath = string.Empty;
             string file = "";
             Form1 form1;
@@ -316,20 +319,52 @@ namespace FilterWF
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    
+
+                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_draft");
+                    if (!Directory.Exists(targetPath))
+                        Directory.CreateDirectory(targetPath);
+
+                    var srcPath = openFileDialog.FileName;
+                    string srcfilename = Path.GetFileName(srcPath);
+                    string srcfilebase = Path.GetFileNameWithoutExtension(srcfilename);
+                    string srcfilebasedotted = srcfilebase.Replace(" ", "-");
+                    targetPath = Path.Combine(targetPath, srcfilebasedotted + ".md");
+
+                    PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath,"");
+
+
+
                     form1 = LoadForm1();
-                    string fileFolder = Program.BlogSiteRoot;
-                    fileFolder = Path.Combine(fileFolder, "_word");
-                    form1.WorkFolder = fileFolder;
-                    var fileName = openFileDialog.FileName;
-                    file = Path.GetFileName(fileName);
-                    string filebase = Path.GetFileNameWithoutExtension(fileName);
-                    string filebasedotted = filebase.Replace(" ", "-");
-                    string targfile = filebasedotted + ".docx";
-                    System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
-                    MessageBox.Show(fileContent, "Got File Content: " + file, MessageBoxButtons.OK);
-                    PandocUtil.Word2MD(true, false, Program.BlogSiteRoot, fileFolder, targfile, filebase);
+                    form1.Text = openFileDialog.FileName;
+                    form1.srcFilePath = targetPath;
+                    form1.tbSrcFilename_Text = srcfilebasedotted + ".md";
+                    form1.tbSrcFolder_Text = Path.Combine(Program.BlogSiteRoot, "_draft");
+
+                    //Output("__CLEAR__");
+                    //StreamReader sr = File.OpenText(filename);
+                    //Output(sr.ReadToEnd());
+                    form1.LoadFile();
+                    form1.Show();
+
+                    //string fileFolder = Program.BlogSiteRoot;
+                    //fileFolder = Path.Combine(fileFolder, "_word");
+                    //if (!Directory.Exists(fileFolder))
+                    //    Directory.CreateDirectory(fileFolder);
+                    //form1.WorkFolder = fileFolder;
+
+                    //var fileName = openFileDialog.FileName;
+                    //file = Path.GetFileName(fileName);
+                    //string filebase = Path.GetFileNameWithoutExtension(fileName);
+                    //string filebasedotted = filebase.Replace(" ", "-");
+                    //string targfile = filebasedotted + ".docx";
+
+                    //System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
+                    //MessageBox.Show(fileContent, "Got File Content: " + file, MessageBoxButtons.OK);
+                    //PandocUtil.Word2MD(true, false, Program.BlogSiteRoot, Program.WorkingDirectory, filebasedotted);
+
                     form1.chkJustrDoneConversion_Checked = true;
-                    form1.Text = filebase + " " + childFormNumber++;
+                    form1.Text = targetPath + " " + childFormNumber++;
                 }
 
             }
@@ -356,15 +391,20 @@ namespace FilterWF
                     form1 = LoadForm1();
                     string fileFolder = Program.BlogSiteRoot;
                     fileFolder = Path.Combine(fileFolder, "_html");
+                    if (!Directory.Exists(fileFolder))
+                        Directory.CreateDirectory(fileFolder);
                     form1.WorkFolder = fileFolder;
+
                     var fileName = openFileDialog.FileName;
                     file = Path.GetFileName(fileName);
                     string filebase = Path.GetFileNameWithoutExtension(fileName);
                     string filebasedotted = filebase.Replace(" ", "-");
                     string targfile = filebasedotted + ".html";
+
                     System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
                     MessageBox.Show("Got File Content: " + file, fileContent, MessageBoxButtons.OK);
-                    PandocUtil.Word2MD(false, true, Program.BlogSiteRoot, fileFolder, targfile, filebase);
+                    PandocUtil.Word2MD(false, true, Program.BlogSiteRoot, Program.WorkingDirectory, filebasedotted);
+
                     form1.chkJustrDoneConversion_Checked = true;
                     form1.Text = filebase + " " + childFormNumber++;
                 }
@@ -373,7 +413,7 @@ namespace FilterWF
         }
 
         //Existing as gets url from form1
-        private void Httpo2MD_Click(object sender, EventArgs e)
+        private void Http2MD_Click(object sender, EventArgs e)
         {
             Form1 form1;
             if (this.ActiveMdiChild is Form1)
@@ -381,12 +421,38 @@ namespace FilterWF
                 form1 = (Form1)this.ActiveMdiChild;
                 if (form1 != null)
                 {
-                    string html = form1.tbUrl_Text;
+                    string url = form1.tbUrl_Text;
+                    bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
                     string title = form1.tbHtmlTitle_Text;
-                    string fileFolder = Program.BlogSiteRoot;
-                    fileFolder = Path.Combine(fileFolder, "_html");
+                    string fileFolder = form1.tbSrcFolder_Text;
+                    string filename = form1.tbSrcFilename_Text;
+                    if ((!isUrl)|| (fileFolder == "") || (filename==""))
+                    {
+                        MessageBox.Show("Download Url to MD", "Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
+                        return;
+                    }
+                    string filePath = Path.Combine(fileFolder, filename);
+
+                    string targetPath = form1.Text;
+                    if (!File.Exists(targetPath))
+                    {
+                        MessageBox.Show("Download Url to MD", "Target file not found: Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
+                        return;
+                    }
+;
+                    string srcfilename = filename;
+                    string srcfilebase = Path.GetFileNameWithoutExtension(""); // srcfilename);
+
+
+                    targetPath = filePath;
+
+
+
+                    
                     form1.WorkFolder = fileFolder;
-                    PandocUtil.Word2MD(false, false, Program.BlogSiteRoot, fileFolder, html, title);
+                    PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath);
+
+
                     form1.chkJustrDoneConversion_Checked = true;
                     form1.Text = title + " " + childFormNumber++;
                 }
@@ -587,21 +653,43 @@ namespace FilterWF
                 form1 = (Form1)this.ActiveMdiChild;
                 if (form1 != null)
                 {
-                    string path = form1.filepath;
-                    PandocUtil.MD2Html( Program.BlogSiteRoot, "_drafts", path, "temp");
-                    string of = Path.Combine(Program.BlogSiteRoot, "_drafts");
-                    of = Path.Combine(of, "temp.html");
+                    string srcPath = form1.filepath;
+                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_drafts");
+                    if (!Directory.Exists(targetPath))
+                        Directory.CreateDirectory(targetPath);
+                    targetPath = Path.Combine(targetPath,"temp.html");
+
+                    string title = Path.GetFileName(srcPath);
+                    SetStatus("Busy: Converting MD to Html.");
+                    PandocUtil.MD2Html( Program.WorkingDirectory, srcPath, targetPath , title);
+                    //string of = Path.Combine(Program.BlogSiteRoot, "_drafts");
+                    //of = Path.Combine(of, "temp.html");
                     frmwebBrowser wb = new frmwebBrowser();
                     wb.MdiParent = this;
-                    wb.Text = path + childFormNumber++;
+                    wb.Text = srcPath + childFormNumber++;
                     wb.WindowState = FormWindowState.Maximized;
-                    wb.PathStr = of;
+                    wb.PathStr = targetPath;
+                    SetStatus("Busy: Rendering Preview.");
                     wb.Show();
 
                 }
             }
         }
 
+        public static void SetStatus(string msg)
+        {
+            mdiparent.statusStrip.Text = msg;
+
+        }
+
+        public static void ClrStatus()
+        {
+            mdiparent.statusStrip.Text = "";
+
+        }
+
 
     }
+
+    
 }
