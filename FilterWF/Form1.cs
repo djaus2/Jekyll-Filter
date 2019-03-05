@@ -838,8 +838,11 @@ namespace FilterWF
             string title = tbHtmlTitle.Text;
             string fileFolder = Program.BlogSiteRoot;
             fileFolder = Path.Combine(fileFolder, "_html");
-            WorkFolder = fileFolder;
-            PandocUtil.Word2MD(false, false, Program.BlogSiteRoot, fileFolder, html);//, title);
+            if (!Directory.Exists(fileFolder))
+                Directory.CreateDirectory(fileFolder);
+            string file = Path.Combine(fileFolder, "temp.html");
+            //WorkFolder = fileFolder;
+            PandocUtil.Http2MD(Program.WorkingDirectory, html, file);
             chkJustrDoneConversion.Checked = true;
 
         }

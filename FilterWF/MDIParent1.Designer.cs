@@ -350,9 +350,9 @@
             this.printToolStripMenuItem,
             this.printPreviewToolStripMenuItem,
             this.printSetupToolStripMenuItem,
-            this.applyFiltersToolStripMenuItem,
+            this.firstItemToolStripMenuItem,
             this.toolStripSeparator77,
-            this.firstItemToolStripMenuItem});
+            this.applyFiltersToolStripMenuItem});
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
             this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.convertToolStripMenuItem.Text = "C&onvert";
@@ -399,7 +399,8 @@
             // 
             this.firstItemToolStripMenuItem.Name = "firstItemToolStripMenuItem";
             this.firstItemToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.firstItemToolStripMenuItem.Text = "First Item";
+            this.firstItemToolStripMenuItem.Text = "Convert &Direct from URL";
+            this.firstItemToolStripMenuItem.Click += new System.EventHandler(this.firstItemToolStripMenuItem_Click);
             // 
             // toolsMenu
             // 

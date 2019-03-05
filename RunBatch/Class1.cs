@@ -83,11 +83,15 @@ namespace RunBatch
                 MessageBox.Show( output ,"Info", MessageBoxButtons.OK); 
         }
 
-        public static void Http2MD(string batDir, string url, string targetPath)
+        public static void Http2MD(string batDir, string url, string targetPath, string tempfilepath="")
         {
             //string of = Path.Combine(blogSiteRoot, pwd);
             //of = Path.Combine(of, title);
             string paramz = "\"" + url + "\"" + " " + "\"" + targetPath + "\"";
+
+            //Use Curl to get file first:
+            if (tempfilepath != "")
+                paramz += " " + "\"" + tempfilepath + "\"";
 
 
 
@@ -128,7 +132,7 @@ namespace RunBatch
             }
             else
             {
-
+                MessageBox.Show("Done","Http to MD Conversion", MessageBoxButtons.OK);
             }
         }
 

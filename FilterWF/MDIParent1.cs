@@ -28,9 +28,11 @@ namespace FilterWF
         //New
         private void ShowNewForm(object sender, EventArgs e)
         {
-            var frm = LoadForm1();
-            frm.Show();
-            frm.WindowState = FormWindowState.Maximized;
+            var form1 = LoadForm1();
+            form1.tbUrl_Text = "";
+            form1.tbHtmlTitle_Text = "";
+            form1.Show();
+            form1.WindowState = FormWindowState.Maximized;
         }
 
         
@@ -56,6 +58,9 @@ namespace FilterWF
                 form1.srcFilePath = fdlg.FileName;
                 form1.tbSrcFilename_Text = Path.GetFileName(form1.srcFilePath);
                 form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
+
+                form1.tbUrl_Text = "";
+                form1.tbHtmlTitle_Text = "";
 
                 //Output("__CLEAR__");
                 //StreamReader sr = File.OpenText(filename);
@@ -281,6 +286,8 @@ namespace FilterWF
                     {
                         form1.srcFilePath = Path.Combine(form1.tbSrcFolder_Text, form1.tbSrcFilename_Text);
                         form1.LoadFile();
+                        form1.tbUrl_Text = "";
+                        form1.tbHtmlTitle_Text = "";
                     }
                 }
             }
@@ -341,6 +348,9 @@ namespace FilterWF
                     form1.tbSrcFilename_Text = srcfilebasedotted + ".md";
                     form1.tbSrcFolder_Text = Path.Combine(Program.BlogSiteRoot, "_draft");
 
+                    form1.tbUrl_Text = "";
+                    form1.tbHtmlTitle_Text = "";
+
                     //Output("__CLEAR__");
                     //StreamReader sr = File.OpenText(filename);
                     //Output(sr.ReadToEnd());
@@ -373,7 +383,77 @@ namespace FilterWF
         //New
         private void Html2MD_Click(object sender, EventArgs e)
         {
+
+
             var fileContent = string.Empty;
+            var filePath = string.Empty;
+            string file = "";
+            Form1 form1;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "Word files (*.html)|*.html|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+
+
+                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_draft");
+                    if (!Directory.Exists(targetPath))
+                        Directory.CreateDirectory(targetPath);
+
+                    var srcPath = openFileDialog.FileName;
+                    string srcfilename = Path.GetFileName(srcPath);
+                    string srcfilebase = Path.GetFileNameWithoutExtension(srcfilename);
+                    string srcfilebasedotted = srcfilebase.Replace(" ", "-");
+                    targetPath = Path.Combine(targetPath, srcfilebasedotted + ".md");
+
+                    PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath, "");
+
+
+
+                    form1 = LoadForm1();
+                    form1.Text = openFileDialog.FileName;
+                    form1.srcFilePath = targetPath;
+                    form1.tbSrcFilename_Text = srcfilebasedotted + ".md";
+                    form1.tbSrcFolder_Text = Path.Combine(Program.BlogSiteRoot, "_draft");
+
+                    form1.tbUrl_Text = "";
+                    form1.tbHtmlTitle_Text = "";
+                    //Output("__CLEAR__");
+                    //StreamReader sr = File.OpenText(filename);
+                    //Output(sr.ReadToEnd());
+                    form1.LoadFile();
+                    form1.Show();
+
+                    //string fileFolder = Program.BlogSiteRoot;
+                    //fileFolder = Path.Combine(fileFolder, "_word");
+                    //if (!Directory.Exists(fileFolder))
+                    //    Directory.CreateDirectory(fileFolder);
+                    //form1.WorkFolder = fileFolder;
+
+                    //var fileName = openFileDialog.FileName;
+                    //file = Path.GetFileName(fileName);
+                    //string filebase = Path.GetFileNameWithoutExtension(fileName);
+                    //string filebasedotted = filebase.Replace(" ", "-");
+                    //string targfile = filebasedotted + ".docx";
+
+                    //System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
+                    //MessageBox.Show(fileContent, "Got File Content: " + file, MessageBoxButtons.OK);
+                    //PandocUtil.Word2MD(true, false, Program.BlogSiteRoot, Program.WorkingDirectory, filebasedotted);
+
+                    form1.chkJustrDoneConversion_Checked = true;
+                    form1.Text = targetPath + " " + childFormNumber++;
+                }
+
+            }
+
+
+            /*var fileContent = string.Empty;
             var filePath = string.Empty;
             string file = "";
             Form1 form1;
@@ -409,7 +489,7 @@ namespace FilterWF
                     form1.Text = filebase + " " + childFormNumber++;
                 }
 
-            }
+            }*/
         }
 
         //Existing as gets url from form1
@@ -448,17 +528,12 @@ namespace FilterWF
 
                 Form1 form1 = LoadForm1();
 
-
-                //form1.Text = fdlg.FileName;
                 form1.srcFilePath = targetPath;
                 form1.tbSrcFilename_Text = Path.GetFileName(targetPath);
                 form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
                 form1.Url = url;
                 form1.Title = title;
 
-                //Output("__CLEAR__");
-                //StreamReader sr = File.OpenText(filename);
-                //Output(sr.ReadToEnd());
                 form1.LoadFile();
 
                 form1.chkJustrDoneConversion_Checked = true;
@@ -472,50 +547,6 @@ namespace FilterWF
             }
             testDialog.Dispose();
 
-
-//            Form1 form1;
-//            if (this.ActiveMdiChild is Form1)
-//            {
-//                form1 = (Form1)this.ActiveMdiChild;
-//                if (form1 != null)
-//                {
-//                    string url = form1.tbUrl_Text;
-//                    bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
-//                    string title = form1.tbHtmlTitle_Text;
-//                    string fileFolder = form1.tbSrcFolder_Text;
-//                    string filename = form1.tbSrcFilename_Text;
-//                    if ((!isUrl)|| (fileFolder == "") || (filename==""))
-//                    {
-//                        MessageBox.Show("Download Url to MD", "Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
-//                        return;
-//                    }
-//                    string filePath = Path.Combine(fileFolder, filename);
-
-//                    string targetPath = form1.Text;
-//                    if (!File.Exists(targetPath))
-//                    {
-//                        MessageBox.Show("Download Url to MD", "Target file not found: Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
-//                        return;
-//                    }
-//;
-//                    string srcfilename = filename;
-//                    string srcfilebase = Path.GetFileNameWithoutExtension(""); // srcfilename);
-
-
-//                    targetPath = filePath;
-
-
-
-                    
-//                    form1.WorkFolder = fileFolder;
-//                    PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath);
-
-
-//                    form1.chkJustrDoneConversion_Checked = true;
-//                    form1.Text = title + " " + childFormNumber++;
-//                }
-//            }
-            
         }
 
         //Existing
@@ -746,7 +777,68 @@ namespace FilterWF
 
         }
 
+        private void firstItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGetUrl testDialog = new frmGetUrl();
+            testDialog.Url = "";
 
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (testDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                string url = testDialog.Url;
+                string title = testDialog.Title;
+
+
+                bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
+                if (!isUrl)
+                {
+                    MessageBox.Show("Download Url to MD", "Invalid Url", MessageBoxButtons.OK);
+                    return;
+                }
+
+                if (title == "")
+                {
+                    MessageBox.Show("Download Url to MD", "Need a page title ", MessageBoxButtons.OK);
+                    return;
+                }
+
+                string filefolder = Path.Combine(Program.BlogSiteRoot, "_drafts");
+                if (!Directory.Exists(filefolder))
+                    Directory.CreateDirectory(filefolder);
+                string targetPath = Path.Combine(filefolder, title + ".md");
+
+                string tempfilefolder = Path.Combine(Program.BlogSiteRoot, "_temp");
+                if (!Directory.Exists(tempfilefolder))
+                    Directory.CreateDirectory(tempfilefolder);
+
+                string tempFile = Path.Combine(tempfilefolder, "temp.html");
+
+                PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath, tempFile);
+
+
+                Form1 form1 = LoadForm1();
+
+                form1.srcFilePath = targetPath;
+                form1.tbSrcFilename_Text = Path.GetFileName(targetPath);
+                form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
+                form1.Url = url;
+                form1.Title = title;
+
+                form1.LoadFile();
+
+                form1.chkJustrDoneConversion_Checked = true;
+                form1.Text = title + " " + childFormNumber++;
+                form1.Show();
+                form1.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+
+            }
+            testDialog.Dispose();
+
+
+        }
     }
 
     

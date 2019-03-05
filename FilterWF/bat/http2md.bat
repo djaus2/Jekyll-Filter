@@ -1,4 +1,6 @@
-@echo on
+@echo off
+@echo One= %1
+@echo TWO= %2
 
 GOTO SkipRaw
 
@@ -18,21 +20,23 @@ IF %2.==. GOTO No1
 
 @echo Going
 
-GOTO SkipCurl
+if %3.==. GOTO  SkipCurl
 
-curl %1 > temp.html
+curl %1 > %3
+pandoc -o %2 %3
 
-
-if exist temp.html (
+rem if exist temp.html (
 GOTO Do3
 ) 
 
- ECHO File not found
+ rem ECHO File not found
 GOTO End1
+
+:Do3
 
 :SkipCurl
 
-:Do3
+
 ECHO Converting %1 to %2 
 
 pandoc -o %2 -f html  %1 
