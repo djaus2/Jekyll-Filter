@@ -415,48 +415,106 @@ namespace FilterWF
         //Existing as gets url from form1
         private void Http2MD_Click(object sender, EventArgs e)
         {
-            Form1 form1;
-            if (this.ActiveMdiChild is Form1)
+            frmGetUrl testDialog = new frmGetUrl();
+            testDialog.Url = "";
+
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (testDialog.ShowDialog(this) == DialogResult.OK)
             {
-                form1 = (Form1)this.ActiveMdiChild;
-                if (form1 != null)
+                string url = testDialog.Url;
+                string title = testDialog.Title;
+
+
+                bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
+                if (!isUrl) 
                 {
-                    string url = form1.tbUrl_Text;
-                    bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
-                    string title = form1.tbHtmlTitle_Text;
-                    string fileFolder = form1.tbSrcFolder_Text;
-                    string filename = form1.tbSrcFilename_Text;
-                    if ((!isUrl)|| (fileFolder == "") || (filename==""))
-                    {
-                        MessageBox.Show("Download Url to MD", "Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
-                        return;
-                    }
-                    string filePath = Path.Combine(fileFolder, filename);
+                    MessageBox.Show("Download Url to MD", "Invalid Url", MessageBoxButtons.OK);
+                    return;
+                }
 
-                    string targetPath = form1.Text;
-                    if (!File.Exists(targetPath))
-                    {
-                        MessageBox.Show("Download Url to MD", "Target file not found: Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
-                        return;
-                    }
-;
-                    string srcfilename = filename;
-                    string srcfilebase = Path.GetFileNameWithoutExtension(""); // srcfilename);
+                if (title == "")
+                {
+                    MessageBox.Show("Download Url to MD","Need a page title ", MessageBoxButtons.OK);
+                    return;
+                }
+
+                string filefolder = Path.Combine(Program.BlogSiteRoot, "_drafts");
+                if (!Directory.Exists(filefolder))
+                    Directory.CreateDirectory(filefolder);
+                string targetPath = Path.Combine(filefolder, title + ".md");
+
+                PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath);
 
 
-                    targetPath = filePath;
+                Form1 form1 = LoadForm1();
+
+
+                //form1.Text = fdlg.FileName;
+                form1.srcFilePath = targetPath;
+                form1.tbSrcFilename_Text = Path.GetFileName(targetPath);
+                form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
+                form1.Url = url;
+                form1.Title = title;
+
+                //Output("__CLEAR__");
+                //StreamReader sr = File.OpenText(filename);
+                //Output(sr.ReadToEnd());
+                form1.LoadFile();
+
+                form1.chkJustrDoneConversion_Checked = true;
+                form1.Text = title + " " + childFormNumber++;
+                form1.Show();
+                form1.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+
+            }
+            testDialog.Dispose();
+
+
+//            Form1 form1;
+//            if (this.ActiveMdiChild is Form1)
+//            {
+//                form1 = (Form1)this.ActiveMdiChild;
+//                if (form1 != null)
+//                {
+//                    string url = form1.tbUrl_Text;
+//                    bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
+//                    string title = form1.tbHtmlTitle_Text;
+//                    string fileFolder = form1.tbSrcFolder_Text;
+//                    string filename = form1.tbSrcFilename_Text;
+//                    if ((!isUrl)|| (fileFolder == "") || (filename==""))
+//                    {
+//                        MessageBox.Show("Download Url to MD", "Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
+//                        return;
+//                    }
+//                    string filePath = Path.Combine(fileFolder, filename);
+
+//                    string targetPath = form1.Text;
+//                    if (!File.Exists(targetPath))
+//                    {
+//                        MessageBox.Show("Download Url to MD", "Target file not found: Need to create a new MD file and save it to drafts and enter the target URL first", MessageBoxButtons.OK);
+//                        return;
+//                    }
+//;
+//                    string srcfilename = filename;
+//                    string srcfilebase = Path.GetFileNameWithoutExtension(""); // srcfilename);
+
+
+//                    targetPath = filePath;
 
 
 
                     
-                    form1.WorkFolder = fileFolder;
-                    PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath);
+//                    form1.WorkFolder = fileFolder;
+//                    PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath);
 
 
-                    form1.chkJustrDoneConversion_Checked = true;
-                    form1.Text = title + " " + childFormNumber++;
-                }
-            }
+//                    form1.chkJustrDoneConversion_Checked = true;
+//                    form1.Text = title + " " + childFormNumber++;
+//                }
+//            }
             
         }
 

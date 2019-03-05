@@ -17,6 +17,9 @@ namespace FilterWF
 
     public partial class Form1 : Form
     {
+        public string Url { get { return tbUrl.Text; } set { tbUrl.Text = value; } }
+        public string Title { get { return tbHtmlTitle.Text; } set { tbHtmlTitle.Text = value; } }
+
         public string srcFilePath { get; set; } = "";
         public string tbSrcFolder_Text { get { return tbSrcFolder.Text; } set { tbSrcFolder.Text = value; } } 
         public string tbSrcFilename_Text { get{return tbSrcFilename.Text;} set {tbSrcFilename.Text = value;}} 

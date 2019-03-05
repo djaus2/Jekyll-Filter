@@ -64,12 +64,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmGetURL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGetURL.Designer.cs">
+      <DependentUpon>frmGetURL.cs</DependentUpon>
+    </Compile>
     <Compile Include="webBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="webBrowser.Designer.cs">
       <DependentUpon>webBrowser.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmGetURL.resx">
+      <DependentUpon>frmGetURL.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="webBrowser.resx">
       <DependentUpon>webBrowser.cs</DependentUpon>
     </EmbeddedResource>
