@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using YamlDotNet.RepresentationModel;
 using RunBatch;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
 
 namespace FilterWF
 {
@@ -43,7 +47,7 @@ namespace FilterWF
         {
             InitializeComponent();
 
-            tbSeperator.Text = Program.tbSeperator_Text;
+            
 
             tbSrcFilename.Text = Program.srcFilename;
             tbSrcFolder.Text = Program.srcFolder;
@@ -99,8 +103,30 @@ namespace FilterWF
                 tbSrcFolder.Text = Path.GetFullPath(srcFilePath).Replace(tbSrcFilename.Text, ""); ;
 
                 Output("__CLEAR__");
-                StreamReader sr = File.OpenText(srcFilePath);
-                Output(sr.ReadToEnd());
+                using (StreamReader sr = File.OpenText(srcFilePath))
+                    Output(sr.ReadToEnd());
+                Post post = ReadHeader(tbOutput.Text);
+                if (post !=null)
+                {
+                    tbTopic.Text = post.title;
+                    tbSubTopic.Text = post.subtitle;
+                    tbTags.Text = post.tags;
+                    string cat = post.category;
+                    var category = from n in Program.Categorys where n.Abbrev == cat select n;
+                    if (category.Count()>0)
+                        if (CategoriesComboBox.Items.Contains(category.First().Name))
+                            CategoriesComboBox.SelectedItem = category.First().Name;
+
+                    if (post.disqus == "1")
+                        checkBox1.Checked = true;
+                    else
+                        checkBox1.Checked = false;
+
+                    if (post.layout == "postpage")
+                        comboBoxPostOrArticle.SelectedIndex = 0;
+                    else
+                        comboBoxPostOrArticle.SelectedIndex = 1;
+                }
             }
             else
             {
@@ -112,6 +138,44 @@ namespace FilterWF
                                              MessageBoxIcon.Exclamation);
                
             }
+        }
+
+        public class Post
+        {
+            public Post()
+            { }
+            public string layout { get; set; }
+            public string title { get; set; }
+            public string subtitle { get; set; }
+            public string category { get; set; }
+            public string date { get; set; }
+            public string author { get; set; }
+            public string tags { get; set; }
+            public string disqus { get; set; }
+
+        }
+
+        public Post ReadHeader(string fileText)
+        {
+            //Ref: https://markheath.net/post/markdown-html-yaml-front-matter
+            var yamlDeserializer = new DeserializerBuilder()
+                                .WithNamingConvention(new CamelCaseNamingConvention())
+                                .Build();
+            Post post = null;
+            var text = fileText;
+            try
+            {
+                using (var input = new StringReader(text))
+                {
+                    var parser = new Parser(input);
+                    parser.Expect<StreamStart>();
+                    parser.Expect<DocumentStart>();
+                    post = yamlDeserializer.Deserialize<Post>(parser);
+                    parser.Expect<DocumentEnd>();
+                }
+            } catch (Exception ex)
+            { post = null; }
+            return post;
         }
 
         public void button2_Click(object sender, EventArgs e)
@@ -349,83 +413,34 @@ namespace FilterWF
             fdlg.FileName = filenameMd + ".md";
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                string header = "";
-                if (cbAddHeader.Checked == true)
-                {
-                    header = "---\r\n";
-                    header += "layout: page\r\n";
-                    if (tbTopic.Text != "")
-                        header += "title: " + tbTopic.Text + "\r\n";
-                    if (tbSubTopic.Text != "")
-                        header += "subtitle: " + tbSubTopic.Text + "\r\n";
-                    if (CategoriesComboBox.SelectedIndex != -1)
-                        header += "category: " + cat + "\r\n";
-                    header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
-                    header += "---\r\n\r\n";
-                    File.WriteAllText(fdlg.FileName, header);
-                }
-                File.AppendAllText( fdlg.FileName, tbOutput.Text);                
+                //string header = "";
+                //if (cbAddHeader.Checked == true)
+                //{
+                //    header = "---\r\n";
+                //    header += "layout: page\r\n";
+                //    if (tbTopic.Text != "")
+                //        header += "title: " + tbTopic.Text + "\r\n";
+                //    if (tbSubTopic.Text != "")
+                //        header += "subtitle: " + tbSubTopic.Text + "\r\n";
+                //    if (CategoriesComboBox.SelectedIndex != -1)
+                //        header += "category: " + cat + "\r\n";
+                //    header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
+                //    header += "---\r\n\r\n";
+                //    File.WriteAllText(fdlg.FileName, header);
+                //}
+                File.WriteAllText( fdlg.FileName, tbOutput.Text);                
             }
         }
 
         public void button3_saveexisting_Click(object sender, EventArgs e)
         {
-            string cat = "post";
-            if (CategoriesComboBox.SelectedIndex != -1)
+            string filenameMd = Path.Combine(tbSrcFolder.Text, tbSrcFilename.Text);
+            if (!File.Exists(filenameMd))
             {
-                var abbrev = from n in Program.Categorys where n.Name == (string)CategoriesComboBox.SelectedItem select n;
-                if (abbrev.Count() == 1)
-                    cat = abbrev.First().Abbrev;
+                MessageBox.Show("File doesn't exist. Do Save As first.", "Fie Save", MessageBoxButtons.OK);
+                return;
             }
-            string filenameMd = DateTime.UtcNow.ToString("yyyy-MM-dd") + "-" + tbTopic.Text.Replace(" ", "-") + "-" + cat;
-            SaveFileDialog fdlg = new SaveFileDialog();
-            fdlg.Title = "Save Markdown file As";
-            var x = Environment.CurrentDirectory;
-            fdlg.InitialDirectory = Path.Combine(
-               Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-               "");
-            if (tbSrcFolder.Text != "")
-                fdlg.InitialDirectory = tbSrcFolder.Text;
-            if (Program.BlogSiteRoot != "")
-                fdlg.InitialDirectory = Path.Combine(Program.BlogSiteRoot, "_" + CategoriesComboBox.SelectedItem);
-
-            if (JustDoneConversion)
-                fdlg.InitialDirectory = Path.Combine(Program.BlogSiteRoot, "_posts");
-
-            fdlg.Filter = "Markdown (*.md)|*.md|Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            fdlg.FilterIndex = 1;
-            fdlg.RestoreDirectory = true;
-            fdlg.FileName = filenameMd + ".md";
-            if (fdlg.ShowDialog() == DialogResult.OK)
-            {
-                //if (File.Exists(fdlg.FileName))
-                //{
-
-                //    string message =
-                //        "File already exists!\r\n"+ fdlg.FileName;
-                //    const string caption = "Save Markdown file As";
-                //    var result = MessageBox.Show(message, caption,
-                //                                 MessageBoxButtons.OK,
-                //                                 MessageBoxIcon.Exclamation);
-                //    return;
-                //}
-                string header = "";
-                if (cbAddHeader.Checked == true)
-                {
-                    header = "---\r\n";
-                    header += "layout: page\r\n";
-                    if (tbTopic.Text != "")
-                        header += "title: " + tbTopic.Text + "\r\n";
-                    if (tbSubTopic.Text != "")
-                        header += "subtitle: " + tbSubTopic.Text + "\r\n";
-                    if (CategoriesComboBox.SelectedIndex != -1)
-                        header += "category: " + cat + "\r\n";
-                    header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
-                    header += "---\r\n\r\n";
-                    File.WriteAllText(fdlg.FileName, header);
-                }
-                File.AppendAllText(fdlg.FileName, tbOutput.Text);
-            }
+            File.WriteAllText(filenameMd, tbOutput.Text);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -575,7 +590,7 @@ namespace FilterWF
             testDialog.Cat = cat;
             testDialog.IsPost = true;
             testDialog.IsDisqus = true;
-            testDialog.Seperator = tbSeperator.Text;
+            testDialog.Seperator = Program.tbSeperator_Text;
 
             if (testDialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -589,7 +604,7 @@ namespace FilterWF
                 bool isDisqus = testDialog.IsDisqus;
                 bool topicAndSubTopics = testDialog.TopicAndSubTopics;
                 bool headingsAndBlurbs = testDialog.HeadingsAndBlurbs;
-                tbSeperator.Text  = testDialog.Seperator;
+                ;
 
                 //Process it
                 string topic = newTopic.Trim();
@@ -616,7 +631,7 @@ namespace FilterWF
 
                 DateTime date = newDate;
                 string blurb = "The quick brown fox jumps over the lazy dog";
-                string subTopicOrHeadingBlurbSep = tbSeperator.Text;
+                string subTopicOrHeadingBlurbSep = testDialog.Seperator;
 
                 string postslPath = Path.Combine(Program.BlogSiteRoot, "_posts");
                 for (int i = 0; i < subTopics.Length; i++)

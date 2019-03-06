@@ -50,12 +50,6 @@ namespace FilterWF
             this.label9 = new System.Windows.Forms.Label();
             this.CategoriesComboBox = new System.Windows.Forms.ComboBox();
             this.cbAddHeader = new System.Windows.Forms.CheckBox();
-            this.tbSeperator = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.chkJustrDoneConversion = new System.Windows.Forms.CheckBox();
             this.tbUrl = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -185,7 +179,7 @@ namespace FilterWF
             this.tbOutput.Multiline = true;
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(964, 254);
+            this.tbOutput.Size = new System.Drawing.Size(964, 279);
             this.tbOutput.TabIndex = 14;
             // 
             // label7
@@ -252,67 +246,6 @@ namespace FilterWF
             this.cbAddHeader.Text = "Add Header Info";
             this.cbAddHeader.UseVisualStyleBackColor = true;
             // 
-            // tbSeperator
-            // 
-            this.tbSeperator.Location = new System.Drawing.Point(263, 97);
-            this.tbSeperator.Name = "tbSeperator";
-            this.tbSeperator.Size = new System.Drawing.Size(55, 20);
-            this.tbSeperator.TabIndex = 31;
-            this.tbSeperator.Text = "@@@";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(96, 100);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(158, 13);
-            this.label10.TabIndex = 32;
-            this.label10.Text = "AutoGen Topic-Blurb Seperator:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(97, 124);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(149, 13);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "Need to select a Category first";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Blue;
-            this.label12.Location = new System.Drawing.Point(343, 97);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(254, 13);
-            this.label12.TabIndex = 34;
-            this.label12.Text = "Generate a set of posts on same topic and cetegory.";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Blue;
-            this.label13.Location = new System.Drawing.Point(343, 112);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(201, 13);
-            this.label13.TabIndex = 35;
-            this.label13.Text = "Give each a subtopic and optional blurb..";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Blue;
-            this.label14.Location = new System.Drawing.Point(343, 127);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(340, 13);
-            this.label14.TabIndex = 36;
-            this.label14.Text = "Alt. Each a separte heading, but common Category; and optional blurb.";
-            // 
             // chkJustrDoneConversion
             // 
             this.chkJustrDoneConversion.AutoSize = true;
@@ -363,7 +296,7 @@ namespace FilterWF
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.tbNoLinesToSkipAtStart);
             this.groupBox1.Controls.Add(this.cbAddHeader);
-            this.groupBox1.Location = new System.Drawing.Point(-4, 143);
+            this.groupBox1.Location = new System.Drawing.Point(0, 96);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(968, 192);
             this.groupBox1.TabIndex = 44;
@@ -389,9 +322,9 @@ namespace FilterWF
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.CategoriesComboBox);
             this.groupBox2.Controls.Add(this.tbOutput);
-            this.groupBox2.Location = new System.Drawing.Point(-4, 341);
+            this.groupBox2.Location = new System.Drawing.Point(0, 296);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(964, 415);
+            this.groupBox2.Size = new System.Drawing.Size(964, 440);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             // 
@@ -456,12 +389,6 @@ namespace FilterWF
             this.Controls.Add(this.label15);
             this.Controls.Add(this.tbUrl);
             this.Controls.Add(this.chkJustrDoneConversion);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.tbSeperator);
             this.Controls.Add(this.tbSrcFolder);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -501,12 +428,6 @@ namespace FilterWF
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox CategoriesComboBox;
         private System.Windows.Forms.CheckBox cbAddHeader;
-        private System.Windows.Forms.TextBox tbSeperator;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox chkJustrDoneConversion;
         private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.Label label15;
