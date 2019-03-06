@@ -62,6 +62,11 @@ namespace FilterWF
             this.tbHtmlTitle = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBoxPostOrArticle = new System.Windows.Forms.ComboBox();
+            this.tbTags = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -176,11 +181,11 @@ namespace FilterWF
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbOutput.Location = new System.Drawing.Point(4, 120);
+            this.tbOutput.Location = new System.Drawing.Point(4, 161);
             this.tbOutput.Multiline = true;
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbOutput.Size = new System.Drawing.Size(964, 295);
+            this.tbOutput.Size = new System.Drawing.Size(964, 254);
             this.tbOutput.TabIndex = 14;
             // 
             // label7
@@ -239,7 +244,7 @@ namespace FilterWF
             this.cbAddHeader.AutoSize = true;
             this.cbAddHeader.Checked = true;
             this.cbAddHeader.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbAddHeader.Location = new System.Drawing.Point(476, 82);
+            this.cbAddHeader.Location = new System.Drawing.Point(38, 96);
             this.cbAddHeader.Margin = new System.Windows.Forms.Padding(1);
             this.cbAddHeader.Name = "cbAddHeader";
             this.cbAddHeader.Size = new System.Drawing.Size(104, 17);
@@ -357,6 +362,7 @@ namespace FilterWF
             this.groupBox1.Controls.Add(this.tbEndFilterCSVList2);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.tbNoLinesToSkipAtStart);
+            this.groupBox1.Controls.Add(this.cbAddHeader);
             this.groupBox1.Location = new System.Drawing.Point(-4, 143);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(968, 192);
@@ -371,19 +377,72 @@ namespace FilterWF
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.comboBoxPostOrArticle);
+            this.groupBox2.Controls.Add(this.tbTags);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.tbTopic);
             this.groupBox2.Controls.Add(this.tbSubTopic);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.CategoriesComboBox);
-            this.groupBox2.Controls.Add(this.cbAddHeader);
             this.groupBox2.Controls.Add(this.tbOutput);
             this.groupBox2.Location = new System.Drawing.Point(-4, 341);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(964, 415);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(536, 121);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBox1.Size = new System.Drawing.Size(146, 17);
+            this.checkBox1.TabIndex = 30;
+            this.checkBox1.Text = "Enable Disqus Comments";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(491, 83);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(75, 13);
+            this.label16.TabIndex = 29;
+            this.label16.Text = "Post or Article:";
+            // 
+            // comboBoxPostOrArticle
+            // 
+            this.comboBoxPostOrArticle.FormattingEnabled = true;
+            this.comboBoxPostOrArticle.Items.AddRange(new object[] {
+            "Post/s",
+            "Article/s"});
+            this.comboBoxPostOrArticle.Location = new System.Drawing.Point(614, 80);
+            this.comboBoxPostOrArticle.Name = "comboBoxPostOrArticle";
+            this.comboBoxPostOrArticle.Size = new System.Drawing.Size(68, 21);
+            this.comboBoxPostOrArticle.TabIndex = 28;
+            // 
+            // tbTags
+            // 
+            this.tbTags.Location = new System.Drawing.Point(166, 118);
+            this.tbTags.Name = "tbTags";
+            this.tbTags.Size = new System.Drawing.Size(350, 20);
+            this.tbTags.TabIndex = 27;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(112, 125);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(31, 13);
+            this.label17.TabIndex = 31;
+            this.label17.Text = "Tags";
             // 
             // Form1
             // 
@@ -455,6 +514,11 @@ namespace FilterWF
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.TextBox tbOutput;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBoxPostOrArticle;
+        private System.Windows.Forms.TextBox tbTags;
+        private System.Windows.Forms.Label label17;
     }
 }
 

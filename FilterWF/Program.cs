@@ -82,7 +82,7 @@ namespace FilterWF
                 frmSettings frmSettings = new frmSettings();
                 frmSettings.ShowDialog();
             }
-#if DEBUG
+/*#if DEBUG
             blogSiteRoot = Directory.GetParent(WorkingDirectory).Parent.FullName;
             blogSiteRoot = Path.Combine("..\\..", blogSiteRoot);
             DirectoryInfo di = new DirectoryInfo(blogSiteRoot);
@@ -95,7 +95,7 @@ namespace FilterWF
 #else
            //string  blogSiteRoot = Environment.GetEnvironmentVariable("BLOGSITEROOT");
            //blogSiteRoot = Properties.Settings.Default["BlogSiteRoot"]
-#endif
+#endif*/
             BlogSiteRoot = blogSiteRoot;
 
             LoadYaml();
@@ -352,7 +352,9 @@ namespace FilterWF
                 //        CategoriesComboBox.SelectedItem = Program.category;
                 //}
             }
-
+            var cats = from c in Categorys select c.Abbrev;
+            Categories = cats.ToArray();
         }
+        
     }
 }

@@ -20,6 +20,9 @@ namespace FilterWF
         public string Url { get { return tbUrl.Text; } set { tbUrl.Text = value; } }
         public string Title { get { return tbHtmlTitle.Text; } set { tbHtmlTitle.Text = value; } }
 
+        public string Topic { get { return tbTopic.Text; } set { tbTopic.Text = value; } }
+        public string SubTopic { get { return tbSubTopic.Text; } set { tbSubTopic.Text = value; } }
+
         public string srcFilePath { get; set; } = "";
         public string tbSrcFolder_Text { get { return tbSrcFolder.Text; } set { tbSrcFolder.Text = value; } } 
         public string tbSrcFilename_Text { get{return tbSrcFilename.Text;} set {tbSrcFilename.Text = value;}} 
@@ -50,6 +53,9 @@ namespace FilterWF
             tbStartFilterCSVList.Text = Program.startFilters;
             tbSkipListLines.Text = Program.skipFilters.Replace(",", "\r\n");
             tbEndFilterCSVList2.Text = Program.endFilters;
+
+            var cats = from c in Program.Categorys select c.Name;
+            CategoriesComboBox.Items.AddRange(cats.ToArray());
 
             srcFilePath = Program.srcPath;
             groupBox1.Visible = false;
@@ -905,6 +911,52 @@ namespace FilterWF
                 groupBox2.Height += groupBox1.Height;
                 tbOutput.Height = groupBox2.Height - 120;
             }
+        }
+
+        public void AddMetaInfo()
+        {
+            string header = "";
+            string tags = tbTags.Text;
+            bool useDiscuss = ( checkBox1.Checked==true);
+            bool isPost = true;
+            if (comboBoxPostOrArticle.SelectedIndex != -1)
+            {
+                string post = (string) comboBoxPostOrArticle.SelectedItem;
+                if (post != "Post")
+                    isPost = true;
+            }
+            string cat = "";
+            if (CategoriesComboBox.SelectedIndex != -1)
+            {
+                var abbrev = from n in Program.Categorys where n.Name == (string)CategoriesComboBox.SelectedItem select n;
+                if (abbrev.Count() == 1)
+                    cat = abbrev.First().Abbrev;
+            }
+
+            header = "---\r\n";
+            if (isPost)
+                header += "layout: postpage\r\n";
+            else
+                header += "layout: page\r\n";
+            if (tbTopic.Text != "")
+                header += "title: " + tbTopic.Text + "\r\n";
+            if (tbSubTopic.Text != "")
+                header += "subtitle: " + tbSubTopic.Text + "\r\n";
+            if (CategoriesComboBox.SelectedIndex != -1)
+                header += "category: " + cat + "\r\n";
+            header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
+            if (tags != "")
+                header += "tags: " + tags + "\r\n";
+            //if (CategoriesComboBox.SelectedIndex != -1)
+            header += "category: " + cat + "\r\n";
+            if (useDiscuss)
+                header += "disqus: " + "1" + "\r\n";
+            else
+                header += "disqus: " + "0" + "\r\n";
+            header += "---\r\n\r\n";
+
+            tbOutput.Text = header + tbOutput.Text;
+            
         }
     }
 

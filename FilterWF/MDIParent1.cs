@@ -341,7 +341,7 @@ namespace FilterWF
                     PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath,"");
 
 
-
+                
                     form1 = LoadForm1();
                     form1.Text = openFileDialog.FileName;
                     form1.srcFilePath = targetPath;
@@ -838,6 +838,19 @@ namespace FilterWF
             testDialog.Dispose();
 
 
+        }
+
+        private void applyMetaInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 form1;
+            if (this.ActiveMdiChild is Form1)
+            {
+                form1 = (Form1)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    form1.AddMetaInfo();
+                }
+            }
         }
     }
 
