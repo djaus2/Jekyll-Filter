@@ -56,11 +56,20 @@ namespace FilterWF
             this.tbHtmlTitle = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.comboBoxPostOrArticle = new System.Windows.Forms.ComboBox();
             this.tbTags = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.tbLang = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbDate = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbAuth = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -310,6 +319,15 @@ namespace FilterWF
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.dateTimePicker1);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.tbAuth);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.tbDate);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.tbLang);
+            this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label16);
@@ -328,12 +346,21 @@ namespace FilterWF
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(112, 125);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(31, 13);
+            this.label17.TabIndex = 31;
+            this.label17.Text = "Tags";
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(536, 121);
+            this.checkBox1.Location = new System.Drawing.Point(806, 22);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBox1.Size = new System.Drawing.Size(146, 17);
@@ -363,19 +390,86 @@ namespace FilterWF
             // 
             // tbTags
             // 
-            this.tbTags.Location = new System.Drawing.Point(166, 118);
+            this.tbTags.Location = new System.Drawing.Point(166, 121);
             this.tbTags.Name = "tbTags";
             this.tbTags.Size = new System.Drawing.Size(350, 20);
             this.tbTags.TabIndex = 27;
             // 
-            // label17
+            // tbLang
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(112, 125);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(31, 13);
-            this.label17.TabIndex = 31;
-            this.label17.Text = "Tags";
+            this.tbLang.Location = new System.Drawing.Point(740, 19);
+            this.tbLang.Name = "tbLang";
+            this.tbLang.Size = new System.Drawing.Size(54, 20);
+            this.tbLang.TabIndex = 32;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(700, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 13);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Lang:";
+            // 
+            // tbDate
+            // 
+            this.tbDate.Location = new System.Drawing.Point(740, 51);
+            this.tbDate.Name = "tbDate";
+            this.tbDate.Size = new System.Drawing.Size(212, 20);
+            this.tbDate.TabIndex = 34;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(700, 54);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(36, 13);
+            this.label11.TabIndex = 35;
+            this.label11.Text = "Date: ";
+            // 
+            // tbAuth
+            // 
+            this.tbAuth.Location = new System.Drawing.Point(740, 83);
+            this.tbAuth.Name = "tbAuth";
+            this.tbAuth.Size = new System.Drawing.Size(212, 20);
+            this.tbAuth.TabIndex = 36;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(695, 86);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Author:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label13.Location = new System.Drawing.Point(700, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(67, 13);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "Misc. Info:";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(741, 121);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(211, 20);
+            this.dateTimePicker1.TabIndex = 50;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged_1);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(683, 125);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(52, 13);
+            this.label14.TabIndex = 51;
+            this.label14.Text = "Set Date:";
             // 
             // Form1
             // 
@@ -440,6 +534,15 @@ namespace FilterWF
         private System.Windows.Forms.ComboBox comboBoxPostOrArticle;
         private System.Windows.Forms.TextBox tbTags;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox tbDate;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbLang;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbAuth;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label14;
     }
 }
 

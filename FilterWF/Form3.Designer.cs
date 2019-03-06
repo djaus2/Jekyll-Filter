@@ -82,6 +82,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(211, 20);
             this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // button1
             // 
@@ -150,6 +151,7 @@
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "From Date:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // textBox1
             // 

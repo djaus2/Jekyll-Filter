@@ -126,6 +126,14 @@ namespace FilterWF
                         comboBoxPostOrArticle.SelectedIndex = 0;
                     else
                         comboBoxPostOrArticle.SelectedIndex = 1;
+
+                    if (!string.IsNullOrEmpty(post.lang))
+                        tbLang.Text = post.lang;
+
+                    if (! string.IsNullOrEmpty(post.date))
+                        tbDate.Text = post.date;
+                    if (!string.IsNullOrEmpty(post.author))
+                        tbAuth.Text = post.author;
                 }
             }
             else
@@ -152,6 +160,7 @@ namespace FilterWF
             public string author { get; set; }
             public string tags { get; set; }
             public string disqus { get; set; }
+            public string lang { get; set; }
 
         }
 
@@ -959,11 +968,19 @@ namespace FilterWF
                 header += "subtitle: " + tbSubTopic.Text + "\r\n";
             if (CategoriesComboBox.SelectedIndex != -1)
                 header += "category: " + cat + "\r\n";
-            header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
             if (tags != "")
                 header += "tags: " + tags + "\r\n";
             //if (CategoriesComboBox.SelectedIndex != -1)
-            header += "category: " + cat + "\r\n";
+            
+            if (tbLang.Text != "")
+                header += "lang: " + tbLang.Text + "\r\n";
+
+            if (tbDate.Text != "")
+                header += "date: " + tbDate.Text + "\r\n";
+
+            if (tbAuth.Text != "")
+                header += "author: " + tbAuth.Text + "\r\n";
+
             if (useDiscuss)
                 header += "disqus: " + "1" + "\r\n";
             else
@@ -972,6 +989,14 @@ namespace FilterWF
 
             tbOutput.Text = header + tbOutput.Text;
             
+        }
+
+
+
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
+        {
+            DateTime date = dateTimePicker1.Value;
+            tbDate.Text = date.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 

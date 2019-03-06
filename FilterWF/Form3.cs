@@ -88,5 +88,15 @@ namespace FilterWF
         {
             textBox4.Text += tbSeperator.Text;
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
