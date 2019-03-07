@@ -938,7 +938,60 @@ namespace FilterWF
                 }
             }
         }
-    }
 
-    
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Form form1;
+            if (this.ActiveMdiChild is Form)
+            {
+                form1 = (Form)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    if (form1.ActiveControl is TextBox)
+                    {
+                        TextBox tb = (TextBox)form1.ActiveControl;
+                        if (tb != null)
+                            // Determine if last operation can be undone in text box.   
+                            if (tb.CanUndo == true)
+                            {
+                                // Undo the last operation.
+                                tb.Undo();
+                                // Clear the undo buffer to prevent last action from being redone.
+                                tb.ClearUndo();
+                            }
+                    }
+                }
+            }
+
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form1;
+            if (this.ActiveMdiChild is Form)
+            {
+                form1 = (Form)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    if (form1.ActiveControl is TextBox)
+                    {
+                        TextBox tb = (TextBox)form1.ActiveControl;
+                        if (tb != null)
+                        {
+                            // Determine if last operation can be undone in text box.   
+                            //if (tb.CanUndo == true)
+                            //{
+                            //    // Undo the last operation.
+                            //    tb.Undo();
+                            //    // Clear the undo buffer to prevent last action from being redone.
+                            //    tb.ClearUndo();
+                            //}
+                        }
+                    }
+                }
+
+            }
+        }
+    }    
 }
