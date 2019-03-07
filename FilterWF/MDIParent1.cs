@@ -219,14 +219,80 @@ namespace FilterWF
 
         private void CutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form form1;
+            if (this.ActiveMdiChild is Form)
+            {
+                form1 = (Form)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    if (form1.ActiveControl is TextBox)
+                    {
+                        TextBox tb = (TextBox)form1.ActiveControl;
+                        if (tb != null)
+                        {
+                            // Ensure that text is currently selected in the text box.   
+                            if (tb.SelectedText != "")
+                                // Cut the selected text in the control and paste it into the Clipboard.
+                                tb.Cut();
+                        }
+                    }
+                }
+            }
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form form1;
+            if (this.ActiveMdiChild is Form)
+            {
+                form1 = (Form)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    if (form1.ActiveControl is TextBox)
+                    {
+                        TextBox tb = (TextBox)form1.ActiveControl;
+                        if (tb != null)
+                        {
+                            // Ensure that text is selected in the text box.   
+                            if (tb.SelectionLength > 0)
+                                // Copy the selected text to the Clipboard.
+                                tb.Copy();
+                        }
+                    }
+                }
+            }
         }
 
         private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form form1;
+            if (this.ActiveMdiChild is Form)
+            {
+                form1 = (Form)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text) == true)
+                    {
+                        if (form1.ActiveControl is TextBox)
+                        {
+                            TextBox tb = (TextBox)form1.ActiveControl;
+                            if (tb != null)
+                            {
+                                // Determine if any text is selected in the text box.
+                                if (tb.SelectionLength > 0)
+                                {
+                                    // Ask user if they want to paste over currently selected text.
+                                    if (MessageBox.Show("Do you want to paste over current selection?", "Cut Example", MessageBoxButtons.YesNo) == DialogResult.No)
+                                        // Move selection to the point after the current selection and paste.
+                                        tb.SelectionStart = tb.SelectionStart + tb.SelectionLength;
+                                }
+                                // Paste current text in Clipboard into text box.
+                                tb.Paste();
+                            }
+                        }
+                    };
+                }
+            }
         }
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -849,6 +915,26 @@ namespace FilterWF
                 if (form1 != null)
                 {
                     form1.AddMetaInfo();
+                }
+            }
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form1;
+            if (this.ActiveMdiChild is Form)
+            {
+                form1 = (Form)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    if (form1.ActiveControl is TextBox)
+                    {
+                        TextBox tb = (TextBox)form1.ActiveControl;
+                        if (tb != null)
+                        {
+                            tb.SelectAll();
+                        }
+                        }
                 }
             }
         }

@@ -384,6 +384,7 @@ namespace FilterWF
 
         }
 
+
         private void Output(string line)
         {
             if (line == "__CLEAR__")
