@@ -65,7 +65,7 @@ namespace FilterWF
                 //Output("__CLEAR__");
                 //StreamReader sr = File.OpenText(filename);
                 //Output(sr.ReadToEnd());
-                form1.LoadFile();
+                form1.LoadFile(false);
                 form1.Show();
             }
         }
@@ -351,7 +351,7 @@ namespace FilterWF
                     if (form1 != null)
                     {
                         form1.srcFilePath = Path.Combine(form1.tbSrcFolder_Text, form1.tbSrcFilename_Text);
-                        form1.LoadFile();
+                        form1.LoadFile(false);
                         form1.tbUrl_Text = "";
                         form1.tbHtmlTitle_Text = "";
                     }
@@ -425,7 +425,7 @@ namespace FilterWF
                     //Output("__CLEAR__");
                     //StreamReader sr = File.OpenText(filename);
                     //Output(sr.ReadToEnd());
-                    form1.LoadFile();
+                    form1.LoadFile(true);
                     form1.Show();
 
                     //string fileFolder = Program.BlogSiteRoot;
@@ -506,7 +506,7 @@ namespace FilterWF
                     //Output("__CLEAR__");
                     //StreamReader sr = File.OpenText(filename);
                     //Output(sr.ReadToEnd());
-                    form1.LoadFile();
+                    form1.LoadFile(true);
                     form1.Show();
 
                     //string fileFolder = Program.BlogSiteRoot;
@@ -572,6 +572,7 @@ namespace FilterWF
         }
 
         //Existing as gets url from form1
+        /*
         private void Http2MD_Click(object sender, EventArgs e)
         {
             frmGetUrl testDialog = new frmGetUrl();
@@ -615,6 +616,69 @@ namespace FilterWF
                 form1.Title = title;
 
                 form1.LoadFile();
+
+                form1.chkJustrDoneConversion_Checked = true;
+                form1.Text = title + " " + childFormNumber++;
+                form1.Show();
+                form1.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+
+            }
+            testDialog.Dispose();
+
+        }
+        */
+
+        private void Http2MD_Click(object sender, EventArgs e)
+        {
+            frmGetUrl testDialog = new frmGetUrl();
+            testDialog.Url = "";
+
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (testDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                string url = testDialog.Url;
+                string title = testDialog.Title;
+
+
+                bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
+                if (!isUrl)
+                {
+                    MessageBox.Show("Download Url to MD", "Invalid Url", MessageBoxButtons.OK);
+                    return;
+                }
+
+                if (title == "")
+                {
+                    MessageBox.Show("Download Url to MD", "Need a page title ", MessageBoxButtons.OK);
+                    return;
+                }
+
+                string filefolder = Path.Combine(Program.BlogSiteRoot, "_drafts");
+                if (!Directory.Exists(filefolder))
+                    Directory.CreateDirectory(filefolder);
+                string targetPath = Path.Combine(filefolder, title + ".md");
+
+                string mediafolder = Path.Combine(Program.BlogSiteRoot, "media");
+                if (!Directory.Exists(mediafolder))
+                    Directory.CreateDirectory(mediafolder);
+
+                PandocUtil.Http2MD(Program.WorkingDirectory, mediafolder, url, targetPath);
+
+
+                Form1 form1 = LoadForm1();
+
+                form1.srcFilePath = targetPath;
+                form1.tbSrcFilename_Text = Path.GetFileName(targetPath);
+                form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
+                form1.Url = url;
+                form1.Title = title;
+
+
+
+                form1.LoadFile(true);
 
                 form1.chkJustrDoneConversion_Checked = true;
                 form1.Text = title + " " + childFormNumber++;
@@ -913,7 +977,7 @@ namespace FilterWF
                 form1.Url = url;
                 form1.Title = title;
 
-                form1.LoadFile();
+                form1.LoadFile(true);
 
                 form1.chkJustrDoneConversion_Checked = true;
                 form1.Text = title + " " + childFormNumber++;

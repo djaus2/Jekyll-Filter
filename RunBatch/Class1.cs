@@ -83,7 +83,7 @@ namespace RunBatch
                 MessageBox.Show( output ,"Info", MessageBoxButtons.OK); 
         }
 
-        public static void Http2MD(string batDir,string mediafolder, string url, string targetPath)
+        public static void Http2MD(string batDir, string mediafolder, string url, string targetPath)
         {
             //string of = Path.Combine(blogSiteRoot, pwd);
             //of = Path.Combine(of, title);

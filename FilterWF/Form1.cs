@@ -95,11 +95,11 @@ namespace FilterWF
                 tbSrcFilename.Text = Path.GetFileName(srcFilePath);
                 tbSrcFolder.Text = Path.GetFullPath(srcFilePath).Replace(tbSrcFilename.Text,"");
 
-                LoadFile();
+                LoadFile(false);
             }
         }
 
-        public void LoadFile()
+        public void LoadFile(bool cleanupImageLinks)
         {
             if (File.Exists(srcFilePath))
             {
@@ -110,26 +110,43 @@ namespace FilterWF
                 using (StreamReader sr = File.OpenText(srcFilePath))
                     Output(sr.ReadToEnd());
 
+                string crud = Program.BlogSiteRoot + "\\media\\";
+                tbOutput.Text = tbOutput.Text.Replace(crud, "/media/");
+
+                crud = Program.BlogSiteRoot + "\\media/";
+                tbOutput.Text = tbOutput.Text.Replace(crud, "/media/");
+
                 _post = ReadHeader(tbOutput.Text);
                 if (_post !=null)
                 {
-                    tbTopic.Text = _post.title;
-                    tbSubTopic.Text = _post.subtitle;
-                    tbTags.Text = _post.tags;
-                    string cat = _post.category;
-                    var category = from n in Program.Categorys where n.Abbrev == cat select n;
-                    if (category.Count()>0)
-                        if (CategoriesComboBox.Items.Contains(category.First().Name))
-                            CategoriesComboBox.SelectedItem = category.First().Name;
+                    if (_post.title != null)
+                        tbTopic.Text = _post.title;
+                    if (_post.subtitle != null)
+                        tbSubTopic.Text = _post.subtitle;
+                    if (_post.tags != null)
+                        tbTags.Text = _post.tags;
+                    if (_post.category != null)
+                    {
+                        string cat = _post.category;
+                        var category = from n in Program.Categorys where n.Abbrev == cat select n;
+                        if (category.Count() > 0)
+                            if (CategoriesComboBox.Items.Contains(category.First().Name))
+                                CategoriesComboBox.SelectedItem = category.First().Name;
+                    }
+                    if (_post.disqus != null)
+                    {
+                        if (_post.disqus == "1")
+                            checkBox1.Checked = true;
+                        else
+                            checkBox1.Checked = false;
+                    }
 
-                    if (_post.disqus == "1")
-                        checkBox1.Checked = true;
-                    else
-                        checkBox1.Checked = false;
-
-                    string layout = _post.layout;
-                    if (comboBox1.Items.Contains(layout))
-                        comboBox1.SelectedItem = layout;
+                    if (_post.layout != null)
+                    {
+                        string layout = _post.layout;
+                        if (comboBox1.Items.Contains(layout))
+                            comboBox1.SelectedItem = layout;
+                    }
                     //if (post.layout == "postpage")
                     //    comboBoxPostOrArticle.SelectedIndex = 0;
                     //else
@@ -513,11 +530,6 @@ namespace FilterWF
                 //    File.WriteAllText(fdlg.FileName, header);
                 //}
                 string content = tbOutput.Text;
-                string crud = Program.BlogSiteRoot + "\\media\\";
-                content = content.Replace(crud, "media/");
-
-                crud = Program.BlogSiteRoot + "\\media/";
-                content = content.Replace(crud, "media/");
 
 
                 File.WriteAllText(fdlg.FileName, content);
@@ -537,19 +549,19 @@ namespace FilterWF
             File.WriteAllText(filenameMd, tbOutput.Text);
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Form2 fm2 = new Form2();
-            fm2.ShowDialog();
-        }
+        //private void button5_Click(object sender, EventArgs e)
+        //{
+        //    Form2 fm2 = new Form2();
+        //    fm2.ShowDialog();
+        //}
 
 
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            srcFilePath = Path.Combine(tbSrcFolder.Text, tbSrcFilename.Text);
-            LoadFile();
-        }
+        //private void button6_Click(object sender, EventArgs e)
+        //{
+        //    srcFilePath = Path.Combine(tbSrcFolder.Text, tbSrcFilename.Text);
+        //    LoadFile();
+        //}
 
         public void cmdAddCategory_Click(object sender, EventArgs e)
         {
