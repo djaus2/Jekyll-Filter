@@ -67,9 +67,9 @@ namespace FilterWF
             this.label10 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.comboBoxPostOrArticle = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tbTags = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +77,7 @@ namespace FilterWF
             // tbSrcFilename
             // 
             this.tbSrcFilename.Location = new System.Drawing.Point(324, 13);
-            this.tbSrcFilename.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbSrcFilename.Margin = new System.Windows.Forms.Padding(6);
             this.tbSrcFilename.Name = "tbSrcFilename";
             this.tbSrcFilename.Size = new System.Drawing.Size(628, 31);
             this.tbSrcFilename.TabIndex = 1;
@@ -105,7 +105,7 @@ namespace FilterWF
             // tbSrcFolder
             // 
             this.tbSrcFolder.Location = new System.Drawing.Point(324, 73);
-            this.tbSrcFolder.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbSrcFolder.Margin = new System.Windows.Forms.Padding(6);
             this.tbSrcFolder.Name = "tbSrcFolder";
             this.tbSrcFolder.Size = new System.Drawing.Size(1028, 31);
             this.tbSrcFolder.TabIndex = 4;
@@ -115,7 +115,7 @@ namespace FilterWF
             this.tbStartFilterCSVList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbStartFilterCSVList.Location = new System.Drawing.Point(326, 58);
-            this.tbStartFilterCSVList.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbStartFilterCSVList.Margin = new System.Windows.Forms.Padding(6);
             this.tbStartFilterCSVList.Name = "tbStartFilterCSVList";
             this.tbStartFilterCSVList.Size = new System.Drawing.Size(3048, 31);
             this.tbStartFilterCSVList.TabIndex = 6;
@@ -155,7 +155,7 @@ namespace FilterWF
             this.tbSkipListLines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSkipListLines.Location = new System.Drawing.Point(326, 112);
-            this.tbSkipListLines.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbSkipListLines.Margin = new System.Windows.Forms.Padding(6);
             this.tbSkipListLines.Multiline = true;
             this.tbSkipListLines.Name = "tbSkipListLines";
             this.tbSkipListLines.Size = new System.Drawing.Size(3048, 164);
@@ -176,7 +176,7 @@ namespace FilterWF
             this.tbEndFilterCSVList2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbEndFilterCSVList2.Location = new System.Drawing.Point(328, 310);
-            this.tbEndFilterCSVList2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbEndFilterCSVList2.Margin = new System.Windows.Forms.Padding(6);
             this.tbEndFilterCSVList2.Name = "tbEndFilterCSVList2";
             this.tbEndFilterCSVList2.Size = new System.Drawing.Size(3046, 31);
             this.tbEndFilterCSVList2.TabIndex = 11;
@@ -184,7 +184,7 @@ namespace FilterWF
             // tbNoLinesToSkipAtStart
             // 
             this.tbNoLinesToSkipAtStart.Location = new System.Drawing.Point(328, 385);
-            this.tbNoLinesToSkipAtStart.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbNoLinesToSkipAtStart.Margin = new System.Windows.Forms.Padding(6);
             this.tbNoLinesToSkipAtStart.Name = "tbNoLinesToSkipAtStart";
             this.tbNoLinesToSkipAtStart.Size = new System.Drawing.Size(156, 31);
             this.tbNoLinesToSkipAtStart.TabIndex = 13;
@@ -200,7 +200,7 @@ namespace FilterWF
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbOutput.Location = new System.Drawing.Point(8, 310);
-            this.tbOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbOutput.Margin = new System.Windows.Forms.Padding(6);
             this.tbOutput.Multiline = true;
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -220,7 +220,7 @@ namespace FilterWF
             // tbTopic
             // 
             this.tbTopic.Location = new System.Drawing.Point(326, 29);
-            this.tbTopic.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbTopic.Margin = new System.Windows.Forms.Padding(6);
             this.tbTopic.Name = "tbTopic";
             this.tbTopic.Size = new System.Drawing.Size(1034, 31);
             this.tbTopic.TabIndex = 18;
@@ -239,7 +239,7 @@ namespace FilterWF
             // tbSubTopic
             // 
             this.tbSubTopic.Location = new System.Drawing.Point(326, 92);
-            this.tbSubTopic.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbSubTopic.Margin = new System.Windows.Forms.Padding(6);
             this.tbSubTopic.Name = "tbSubTopic";
             this.tbSubTopic.Size = new System.Drawing.Size(1034, 31);
             this.tbSubTopic.TabIndex = 20;
@@ -258,7 +258,7 @@ namespace FilterWF
             // 
             this.CategoriesComboBox.FormattingEnabled = true;
             this.CategoriesComboBox.Location = new System.Drawing.Point(332, 154);
-            this.CategoriesComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CategoriesComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.CategoriesComboBox.Name = "CategoriesComboBox";
             this.CategoriesComboBox.Size = new System.Drawing.Size(558, 33);
             this.CategoriesComboBox.TabIndex = 24;
@@ -269,7 +269,7 @@ namespace FilterWF
             this.cbAddHeader.Checked = true;
             this.cbAddHeader.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAddHeader.Location = new System.Drawing.Point(76, 185);
-            this.cbAddHeader.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbAddHeader.Margin = new System.Windows.Forms.Padding(2);
             this.cbAddHeader.Name = "cbAddHeader";
             this.cbAddHeader.Size = new System.Drawing.Size(199, 29);
             this.cbAddHeader.TabIndex = 26;
@@ -280,7 +280,7 @@ namespace FilterWF
             // 
             this.chkJustrDoneConversion.AutoSize = true;
             this.chkJustrDoneConversion.Location = new System.Drawing.Point(1030, 19);
-            this.chkJustrDoneConversion.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.chkJustrDoneConversion.Margin = new System.Windows.Forms.Padding(6);
             this.chkJustrDoneConversion.Name = "chkJustrDoneConversion";
             this.chkJustrDoneConversion.Size = new System.Drawing.Size(256, 29);
             this.chkJustrDoneConversion.TabIndex = 38;
@@ -291,7 +291,7 @@ namespace FilterWF
             // tbUrl
             // 
             this.tbUrl.Location = new System.Drawing.Point(324, 135);
-            this.tbUrl.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbUrl.Margin = new System.Windows.Forms.Padding(6);
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(422, 31);
             this.tbUrl.TabIndex = 41;
@@ -310,7 +310,7 @@ namespace FilterWF
             // tbHtmlTitle
             // 
             this.tbHtmlTitle.Location = new System.Drawing.Point(772, 135);
-            this.tbHtmlTitle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbHtmlTitle.Margin = new System.Windows.Forms.Padding(6);
             this.tbHtmlTitle.Name = "tbHtmlTitle";
             this.tbHtmlTitle.Size = new System.Drawing.Size(288, 31);
             this.tbHtmlTitle.TabIndex = 43;
@@ -331,9 +331,9 @@ namespace FilterWF
             this.groupBox1.Controls.Add(this.tbNoLinesToSkipAtStart);
             this.groupBox1.Controls.Add(this.cbAddHeader);
             this.groupBox1.Location = new System.Drawing.Point(0, 185);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(1936, 369);
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
@@ -358,7 +358,7 @@ namespace FilterWF
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.comboBoxPostOrArticle);
+            this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.tbTags);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.tbTopic);
@@ -368,9 +368,9 @@ namespace FilterWF
             this.groupBox2.Controls.Add(this.CategoriesComboBox);
             this.groupBox2.Controls.Add(this.tbOutput);
             this.groupBox2.Location = new System.Drawing.Point(0, 569);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(1928, 846);
             this.groupBox2.TabIndex = 45;
             this.groupBox2.TabStop = false;
@@ -388,7 +388,7 @@ namespace FilterWF
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(1482, 233);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(6);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(418, 31);
             this.dateTimePicker1.TabIndex = 50;
@@ -409,7 +409,7 @@ namespace FilterWF
             // tbAuth
             // 
             this.tbAuth.Location = new System.Drawing.Point(1480, 160);
-            this.tbAuth.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbAuth.Margin = new System.Windows.Forms.Padding(6);
             this.tbAuth.Name = "tbAuth";
             this.tbAuth.Size = new System.Drawing.Size(420, 31);
             this.tbAuth.TabIndex = 36;
@@ -427,7 +427,7 @@ namespace FilterWF
             // tbDate
             // 
             this.tbDate.Location = new System.Drawing.Point(1480, 98);
-            this.tbDate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbDate.Margin = new System.Windows.Forms.Padding(6);
             this.tbDate.Name = "tbDate";
             this.tbDate.Size = new System.Drawing.Size(420, 31);
             this.tbDate.TabIndex = 34;
@@ -445,7 +445,7 @@ namespace FilterWF
             // tbLang
             // 
             this.tbLang.Location = new System.Drawing.Point(1480, 37);
-            this.tbLang.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbLang.Margin = new System.Windows.Forms.Padding(6);
             this.tbLang.Name = "tbLang";
             this.tbLang.Size = new System.Drawing.Size(104, 31);
             this.tbLang.TabIndex = 32;
@@ -476,7 +476,7 @@ namespace FilterWF
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Location = new System.Drawing.Point(1612, 42);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(6);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBox1.Size = new System.Drawing.Size(291, 29);
@@ -484,35 +484,32 @@ namespace FilterWF
             this.checkBox1.Text = "Enable Disqus Comments";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label16
+            // comboBox1
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(982, 160);
-            this.label16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(152, 25);
-            this.label16.TabIndex = 29;
-            this.label16.Text = "Post or Article:";
-            // 
-            // comboBoxPostOrArticle
-            // 
-            this.comboBoxPostOrArticle.FormattingEnabled = true;
-            this.comboBoxPostOrArticle.Items.AddRange(new object[] {
-            "Post/s",
-            "Article/s"});
-            this.comboBoxPostOrArticle.Location = new System.Drawing.Point(1228, 154);
-            this.comboBoxPostOrArticle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.comboBoxPostOrArticle.Name = "comboBoxPostOrArticle";
-            this.comboBoxPostOrArticle.Size = new System.Drawing.Size(132, 33);
-            this.comboBoxPostOrArticle.TabIndex = 28;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(1160, 157);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(200, 33);
+            this.comboBox1.TabIndex = 28;
             // 
             // tbTags
             // 
             this.tbTags.Location = new System.Drawing.Point(332, 233);
-            this.tbTags.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbTags.Margin = new System.Windows.Forms.Padding(6);
             this.tbTags.Name = "tbTags";
             this.tbTags.Size = new System.Drawing.Size(696, 31);
             this.tbTags.TabIndex = 27;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1025, 163);
+            this.label16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 25);
+            this.label16.TabIndex = 29;
+            this.label16.Text = "Layout: ";
             // 
             // Form1
             // 
@@ -530,7 +527,7 @@ namespace FilterWF
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbSrcFilename);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Filter Markdown File";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -574,8 +571,7 @@ namespace FilterWF
         private System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.TextBox tbOutput;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox comboBoxPostOrArticle;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox tbTags;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tbDate;
@@ -587,6 +583,7 @@ namespace FilterWF
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
     }
 }
 

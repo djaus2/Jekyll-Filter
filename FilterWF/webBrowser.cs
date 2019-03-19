@@ -31,7 +31,7 @@ namespace FilterWF
                 //string path = "file:///" + PathStr;
                 //webBrowser1.Navigate(new Uri(path));
                 textBox1.Text = PathStr;
-                textBox1.ReadOnly = true;
+                textBox1.ReadOnly = false;
                 string path = String.Format("file:///{0}", PathStr);
                 webBrowser1.Url = new Uri( path);
 
@@ -57,6 +57,11 @@ namespace FilterWF
         private void button2_Click(object sender, EventArgs e)
         {
             webBrowser_Load(sender, e);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Url = new Uri(textBox1.Text);
         }
     }
 }

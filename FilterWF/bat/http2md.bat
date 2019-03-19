@@ -1,6 +1,10 @@
 @echo off
-@echo One= %1
-@echo TWO= %2
+@echo One= %1 Media dir
+@echo TWO= %2 source url
+@echo TWO= %3 output file
+
+set MEDIADIR= %1
+rem "C:\Users\DavidJones\source\repos\DJzBlog\Media"
 
 GOTO SkipRaw
 
@@ -17,16 +21,19 @@ set RefLink=
 
 IF %1.==. GOTO No1
 IF %2.==. GOTO No1
+if %3.==. GOTO  Nol
 
 @echo Going
 
-if %3.==. GOTO  SkipCurl
+@echo converting %2 to %3
 
-curl %1 > %3
-pandoc -o %2 %3
+rem curl %1 > %3
+pandoc -s  --extract-media %MEDIADIR% -t markdown -o %3 -r html %2
+
+rem pandoc  -s --extract-media c:\temp\azx\media -o two.md "https://azure.microsoft.com/en-au/services/devops/?&OCID=AID736751_SEM_E6fx72j0&MarinID=E6fx72j0_79439795863658_azure%20devops_be_c__1271035786647226_kwd-79439959028611:loc-9_"
 
 rem if exist temp.html (
-GOTO Do3
+GOTO End1
 ) 
 
  rem ECHO File not found

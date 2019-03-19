@@ -41,9 +41,9 @@ namespace FilterWF
         {
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.Title = "Select Markdown file to filter";
-            fdlg.InitialDirectory = Path.Combine(
-               Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-               "");
+            fdlg.InitialDirectory = Program.BlogSiteRoot;
+            if (!Directory.Exists(Program.BlogSiteRoot))
+                fdlg.InitialDirectory = Path.Combine( Environment.GetFolderPath( Environment.SpecialFolder.MyDocuments),        "");
             Form1 form1;
           
             
@@ -79,7 +79,7 @@ namespace FilterWF
                 form1 = (Form1)this.ActiveMdiChild;
                 if (form1 != null)
                 {
-                    form1.button3_Click(sender, e);
+                    form1.SaveAs_Click(sender, e);
                 }
             }
             
@@ -106,7 +106,7 @@ namespace FilterWF
                         string newTags = testDialog.Tags;
                         string newSubTopics = testDialog.SubTopics;
                         DateTime newDate = testDialog.Date;
-                        bool isPost = testDialog.IsPost;
+                        
                         bool isDisqus = testDialog.IsDisqus;
                         bool topicAndSubTopics = testDialog.TopicAndSubTopics;
                         bool headingsAndBlurbs = testDialog.HeadingsAndBlurbs;
@@ -159,10 +159,10 @@ namespace FilterWF
                             string path = Path.Combine(postslPath, filename);
                             string header = "";
                             header = "---\r\n";
-                            if (isPost)
-                                header += "layout: postpage\r\n";
-                            else
-                                header += "layout: page\r\n";
+                            ////////if (isPost)
+                            ////////    header += "layout: postpage\r\n";
+                            ////////else
+                            ////////    header += "layout: page\r\n";
                             if (topic != "")
                             {
                                 header += "title: " + topic + "\r\n";
@@ -394,7 +394,7 @@ namespace FilterWF
                 {
                     
 
-                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_draft");
+                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_drafts");
                     if (!Directory.Exists(targetPath))
                         Directory.CreateDirectory(targetPath);
 
@@ -403,11 +403,16 @@ namespace FilterWF
                     string srcfilebase = Path.GetFileNameWithoutExtension(srcfilename);
                     string srcfilebasedotted = srcfilebase.Replace(" ", "-");
                     targetPath = Path.Combine(targetPath, srcfilebasedotted + ".md");
+                    PandocUtil.MD2Html(Program.BlogSiteRoot, Program.WorkingDirectory, srcPath, targetPath, srcfilebase);
 
-                    PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath,"");
+                    //Cleanup image urls
+                    string txt = "";
+                    using (StreamReader sr = File.OpenText(targetPath))
+                        txt = sr.ReadToEnd();
+                    string crud = Program.BlogSiteRoot + "/media/";
+                    txt = txt.Replace(crud, "/media/");
+                    File.WriteAllText(targetPath, txt);
 
-
-                
                     form1 = LoadForm1();
                     form1.Text = openFileDialog.FileName;
                     form1.srcFilePath = targetPath;
@@ -468,7 +473,7 @@ namespace FilterWF
                 {
 
 
-                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_draft");
+                    string targetPath = Path.Combine(Program.BlogSiteRoot, "_drafts");
                     if (!Directory.Exists(targetPath))
                         Directory.CreateDirectory(targetPath);
 
@@ -478,8 +483,16 @@ namespace FilterWF
                     string srcfilebasedotted = srcfilebase.Replace(" ", "-");
                     targetPath = Path.Combine(targetPath, srcfilebasedotted + ".md");
 
-                    PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath, "");
+                    //PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath, "");
+                    string mediaFolder = Path.Combine(Program.BlogSiteRoot, "media");
+                    PandocUtil.MD2Html(mediaFolder, Program.WorkingDirectory, srcPath, targetPath, srcfilebase);
 
+                    string txt = "";
+                    using (StreamReader sr = File.OpenText(targetPath))
+                        txt = sr.ReadToEnd();
+                    string crud = Program.BlogSiteRoot + "\\media/";
+                    txt = txt.Replace(crud, "/media/");
+                    File.WriteAllText(targetPath, txt);
 
 
                     form1 = LoadForm1();
@@ -585,11 +598,12 @@ namespace FilterWF
                 }
 
                 string filefolder = Path.Combine(Program.BlogSiteRoot, "_drafts");
+                string mediafolder = Path.Combine(Program.BlogSiteRoot, "media");
                 if (!Directory.Exists(filefolder))
                     Directory.CreateDirectory(filefolder);
-                string targetPath = Path.Combine(filefolder, title + ".md");
+                string targetPath = Path.Combine(filefolder, title+".md");
 
-                PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath);
+                PandocUtil.Http2MD(Program.WorkingDirectory, mediafolder, url, targetPath);
 
 
                 Form1 form1 = LoadForm1();
@@ -816,7 +830,9 @@ namespace FilterWF
 
                     string title = Path.GetFileName(srcPath);
                     SetStatus("Busy: Converting MD to Html.");
-                    PandocUtil.MD2Html( Program.WorkingDirectory, srcPath, targetPath , title);
+                    //PandocUtil.MD2Html( Program.WorkingDirectory, srcPath, targetPath , title);
+                    PandocUtil.MD2Html(Program.BlogSiteRoot, Program.WorkingDirectory, srcPath, targetPath, title);
+
                     //string of = Path.Combine(Program.BlogSiteRoot, "_drafts");
                     //of = Path.Combine(of, "temp.html");
                     frmwebBrowser wb = new frmwebBrowser();
@@ -877,9 +893,16 @@ namespace FilterWF
                 if (!Directory.Exists(tempfilefolder))
                     Directory.CreateDirectory(tempfilefolder);
 
-                string tempFile = Path.Combine(tempfilefolder, "temp.html");
+                string tempFile = title + "_" + Path.GetRandomFileName().Replace(".","_") + ".html";
 
-                PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath, tempFile);
+                tempFile = Path.Combine(tempfilefolder, tempFile);
+
+                PandocUtil.GetWithCurl(Program.BlogSiteRoot, Program.WorkingDirectory, url, tempFile);
+                return;
+
+                //PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath, tempFile);
+
+
 
 
                 Form1 form1 = LoadForm1();
@@ -991,6 +1014,45 @@ namespace FilterWF
                     }
                 }
 
+            }
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            saveToolStripMenuItem_Click(sender, e);
+        }
+
+        private void printPreviewToolStripButton_Click(object sender, EventArgs e)
+        {
+            applyMetaInfoToolStripMenuItem_Click(sender, e);
+        }
+
+        private void helpToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void broswerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmwebBrowser wb = new frmwebBrowser();
+            wb.MdiParent = this;
+            //wb.Text = srcPath + childFormNumber++;
+            wb.WindowState = FormWindowState.Maximized;
+            //wb.PathStr = targetPath;
+            SetStatus("Busy: Rendering Preview.");
+            wb.Show();
+        }
+
+        private void saveAsPostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 form1;
+            if (this.ActiveMdiChild is Form1)
+            {
+                form1 = (Form1)this.ActiveMdiChild;
+                if (form1 != null)
+                {
+                    form1.SaveAsPost_Click(sender, e);
+                }
             }
         }
     }    

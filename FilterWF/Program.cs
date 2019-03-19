@@ -48,6 +48,7 @@ namespace FilterWF
         public static string ymlPath { get; private set; }
         public static bool firstRun { get; private set; }
         public static bool CategorisIn_data { get; internal set; }
+        public static List<string> Layouts { get; private set; }
 
         /// <summary>
         /// The main entry point for the application.
@@ -97,6 +98,36 @@ namespace FilterWF
            //blogSiteRoot = Properties.Settings.Default["BlogSiteRoot"]
 #endif*/
             BlogSiteRoot = blogSiteRoot;
+            Layouts = new List<string>();
+            string layoutsFolder = Path.Combine(BlogSiteRoot, "_layouts");
+            if (Directory.Exists(layoutsFolder))
+            {
+                string[] layoutsArray = Directory.GetFiles(layoutsFolder, "*.html");
+                var layoutnames = from l in layoutsArray select  Path.GetFileNameWithoutExtension(l);
+                Layouts = layoutnames.ToList<string>();
+                if (Layouts.Contains("post"))
+                {
+                    Layouts.Remove("postpage");
+                    Layouts.Insert(0, "postpage");
+                }
+                if (Layouts.Contains("default"))
+                {
+                    Layouts.Remove("post");
+                    Layouts.Insert(0, "post");
+                }
+                if (Layouts.Contains("default"))
+                {
+                    Layouts.Remove("default");
+                    Layouts.Insert(0, "default");
+                }
+                if (Layouts.Contains("page"))
+                {
+                    Layouts.Remove("page");
+                    Layouts.Insert(0, "page");
+                }
+            }
+            if (Layouts.Count == 0)
+                Layouts.AddRange(new List<string>() { "default", "page" });
 
             LoadYaml();
 
