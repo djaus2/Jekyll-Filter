@@ -11,6 +11,9 @@ That project is a Jekyll Blog site but has the first version of this in a subfol
 
 The new (DevOps and Azure hosted) site is now at https://davidjones.sportronics.com.au
 
+## ClickOnce 
+Install directly from [here](https://appz.sportronics.com.au/publish/publish.htm) *Hosted on an Azure Blob Storage-Static Web site*
+
 ## With this app you can:
 - Convert a Word document to MD
 - Convert an Html document to MD
