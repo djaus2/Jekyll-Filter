@@ -60,11 +60,6 @@ namespace FilterWF
                 form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
 
                 form1.tbUrl_Text = "";
-                form1.tbHtmlTitle_Text = "";
-
-                //Output("__CLEAR__");
-                //StreamReader sr = File.OpenText(filename);
-                //Output(sr.ReadToEnd());
                 form1.LoadFile(false);
                 form1.Show();
             }
@@ -159,10 +154,7 @@ namespace FilterWF
                             string path = Path.Combine(postslPath, filename);
                             string header = "";
                             header = "---\r\n";
-                            ////////if (isPost)
-                            ////////    header += "layout: postpage\r\n";
-                            ////////else
-                            ////////    header += "layout: page\r\n";
+
                             if (topic != "")
                             {
                                 header += "title: " + topic + "\r\n";
@@ -422,27 +414,10 @@ namespace FilterWF
                     form1.tbUrl_Text = "";
                     form1.tbHtmlTitle_Text = "";
 
-                    //Output("__CLEAR__");
-                    //StreamReader sr = File.OpenText(filename);
-                    //Output(sr.ReadToEnd());
+
                     form1.LoadFile(true);
                     form1.Show();
 
-                    //string fileFolder = Program.BlogSiteRoot;
-                    //fileFolder = Path.Combine(fileFolder, "_word");
-                    //if (!Directory.Exists(fileFolder))
-                    //    Directory.CreateDirectory(fileFolder);
-                    //form1.WorkFolder = fileFolder;
-
-                    //var fileName = openFileDialog.FileName;
-                    //file = Path.GetFileName(fileName);
-                    //string filebase = Path.GetFileNameWithoutExtension(fileName);
-                    //string filebasedotted = filebase.Replace(" ", "-");
-                    //string targfile = filebasedotted + ".docx";
-
-                    //System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
-                    //MessageBox.Show(fileContent, "Got File Content: " + file, MessageBoxButtons.OK);
-                    //PandocUtil.Word2MD(true, false, Program.BlogSiteRoot, Program.WorkingDirectory, filebasedotted);
 
                     form1.chkJustrDoneConversion_Checked = true;
                     form1.Text = targetPath + " " + childFormNumber++;
@@ -483,7 +458,7 @@ namespace FilterWF
                     string srcfilebasedotted = srcfilebase.Replace(" ", "-");
                     targetPath = Path.Combine(targetPath, srcfilebasedotted + ".md");
 
-                    //PandocUtil.MD2Html(Program.WorkingDirectory, srcPath, targetPath, "");
+
                     string mediaFolder = Path.Combine(Program.BlogSiteRoot, "media");
                     PandocUtil.MD2Html(mediaFolder, Program.WorkingDirectory, srcPath, targetPath, srcfilebase);
 
@@ -503,27 +478,11 @@ namespace FilterWF
 
                     form1.tbUrl_Text = "";
                     form1.tbHtmlTitle_Text = "";
-                    //Output("__CLEAR__");
-                    //StreamReader sr = File.OpenText(filename);
-                    //Output(sr.ReadToEnd());
+
                     form1.LoadFile(true);
                     form1.Show();
 
-                    //string fileFolder = Program.BlogSiteRoot;
-                    //fileFolder = Path.Combine(fileFolder, "_word");
-                    //if (!Directory.Exists(fileFolder))
-                    //    Directory.CreateDirectory(fileFolder);
-                    //form1.WorkFolder = fileFolder;
 
-                    //var fileName = openFileDialog.FileName;
-                    //file = Path.GetFileName(fileName);
-                    //string filebase = Path.GetFileNameWithoutExtension(fileName);
-                    //string filebasedotted = filebase.Replace(" ", "-");
-                    //string targfile = filebasedotted + ".docx";
-
-                    //System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
-                    //MessageBox.Show(fileContent, "Got File Content: " + file, MessageBoxButtons.OK);
-                    //PandocUtil.Word2MD(true, false, Program.BlogSiteRoot, Program.WorkingDirectory, filebasedotted);
 
                     form1.chkJustrDoneConversion_Checked = true;
                     form1.Text = targetPath + " " + childFormNumber++;
@@ -532,104 +491,9 @@ namespace FilterWF
             }
 
 
-            /*var fileContent = string.Empty;
-            var filePath = string.Empty;
-            string file = "";
-            Form1 form1;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "html files (*.html)|*.html|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
-
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    form1 = LoadForm1();
-                    string fileFolder = Program.BlogSiteRoot;
-                    fileFolder = Path.Combine(fileFolder, "_html");
-                    if (!Directory.Exists(fileFolder))
-                        Directory.CreateDirectory(fileFolder);
-                    form1.WorkFolder = fileFolder;
-
-                    var fileName = openFileDialog.FileName;
-                    file = Path.GetFileName(fileName);
-                    string filebase = Path.GetFileNameWithoutExtension(fileName);
-                    string filebasedotted = filebase.Replace(" ", "-");
-                    string targfile = filebasedotted + ".html";
-
-                    System.IO.File.Copy(fileName, Path.Combine(fileFolder, targfile), true);
-                    MessageBox.Show("Got File Content: " + file, fileContent, MessageBoxButtons.OK);
-                    PandocUtil.Word2MD(false, true, Program.BlogSiteRoot, Program.WorkingDirectory, filebasedotted);
-
-                    form1.chkJustrDoneConversion_Checked = true;
-                    form1.Text = filebase + " " + childFormNumber++;
-                }
-
-            }*/
         }
 
-        //Existing as gets url from form1
-        /*
-        private void Http2MD_Click(object sender, EventArgs e)
-        {
-            frmGetUrl testDialog = new frmGetUrl();
-            testDialog.Url = "";
 
-            // Show testDialog as a modal dialog and determine if DialogResult = OK.
-            if (testDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string url = testDialog.Url;
-                string title = testDialog.Title;
-
-
-                bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
-                if (!isUrl) 
-                {
-                    MessageBox.Show("Download Url to MD", "Invalid Url", MessageBoxButtons.OK);
-                    return;
-                }
-
-                if (title == "")
-                {
-                    MessageBox.Show("Download Url to MD","Need a page title ", MessageBoxButtons.OK);
-                    return;
-                }
-
-                string filefolder = Path.Combine(Program.BlogSiteRoot, "_drafts");
-                string mediafolder = Path.Combine(Program.BlogSiteRoot, "media");
-                if (!Directory.Exists(filefolder))
-                    Directory.CreateDirectory(filefolder);
-                string targetPath = Path.Combine(filefolder, title+".md");
-
-                PandocUtil.Http2MD(Program.WorkingDirectory, mediafolder, url, targetPath);
-
-
-                Form1 form1 = LoadForm1();
-
-                form1.srcFilePath = targetPath;
-                form1.tbSrcFilename_Text = Path.GetFileName(targetPath);
-                form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
-                form1.Url = url;
-                form1.Title = title;
-
-                form1.LoadFile();
-
-                form1.chkJustrDoneConversion_Checked = true;
-                form1.Text = title + " " + childFormNumber++;
-                form1.Show();
-                form1.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-
-            }
-            testDialog.Dispose();
-
-        }
-        */
 
         private void Http2MD_Click(object sender, EventArgs e)
         {
@@ -737,22 +601,6 @@ namespace FilterWF
         //None
         private void autoGenerateATopiscPagesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Form1 form1;
-            //if (this.ActiveMdiChild is Form1)
-            //{
-            //    form1 = (Form1)this.ActiveMdiChild;
-            //    if (form1 != null)
-            //    {
-            //        form1.button7_Click(sender, e);
-            //    }
-            //}
-
-            //if (CategoriesComboBox.SelectedIndex == -1)
-            //{
-            //    MessageBox.Show("Select a Category from the list first.");
-            //    return;
-            //}
-            //string cat = (string)CategoriesComboBox.SelectedItem;
 
             var cats = from c in Program.Categorys select c.Name;
             Form3.Categories = cats.ToArray();
@@ -894,11 +742,7 @@ namespace FilterWF
 
                     string title = Path.GetFileName(srcPath);
                     SetStatus("Busy: Converting MD to Html.");
-                    //PandocUtil.MD2Html( Program.WorkingDirectory, srcPath, targetPath , title);
                     PandocUtil.MD2Html(Program.BlogSiteRoot, Program.WorkingDirectory, srcPath, targetPath, title);
-
-                    //string of = Path.Combine(Program.BlogSiteRoot, "_drafts");
-                    //of = Path.Combine(of, "temp.html");
                     frmwebBrowser wb = new frmwebBrowser();
                     wb.MdiParent = this;
                     wb.Text = srcPath + childFormNumber++;
@@ -923,80 +767,7 @@ namespace FilterWF
 
         }
 
-        ///// <summary>
-        ///// /////////////////////
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void firstItemToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    frmGetUrl testDialog = new frmGetUrl();
-        //    testDialog.Url = "";
 
-        //    // Show testDialog as a modal dialog and determine if DialogResult = OK.
-        //    if (testDialog.ShowDialog(this) == DialogResult.OK)
-        //    {
-        //        string url = testDialog.Url;
-        //        string title = testDialog.Title;
-
-
-        //        bool isUrl = (Uri.IsWellFormedUriString(url, UriKind.Absolute));
-        //        if (!isUrl)
-        //        {
-        //            MessageBox.Show("Download Url to MD", "Invalid Url", MessageBoxButtons.OK);
-        //            return;
-        //        }
-
-        //        if (title == "")
-        //        {
-        //            MessageBox.Show("Download Url to MD", "Need a page title ", MessageBoxButtons.OK);
-        //            return;
-        //        }
-
-        //        string filefolder = Path.Combine(Program.BlogSiteRoot, "_drafts");
-        //        if (!Directory.Exists(filefolder))
-        //            Directory.CreateDirectory(filefolder);
-        //        string targetPath = Path.Combine(filefolder, title + ".md");
-
-        //        string tempfilefolder = Path.Combine(Program.BlogSiteRoot, "_temp");
-        //        if (!Directory.Exists(tempfilefolder))
-        //            Directory.CreateDirectory(tempfilefolder);
-
-        //        string tempFile = title + "_" + Path.GetRandomFileName().Replace(".","_") + ".html";
-
-        //        tempFile = Path.Combine(tempfilefolder, tempFile);
-
-        //        PandocUtil.GetWithCurl(Program.BlogSiteRoot, Program.WorkingDirectory, url, tempFile);
-        //        return;
-
-        //        //PandocUtil.Http2MD(Program.WorkingDirectory, url, targetPath, tempFile);
-
-
-
-
-        //        Form1 form1 = LoadForm1();
-
-        //        form1.srcFilePath = targetPath;
-        //        form1.tbSrcFilename_Text = Path.GetFileName(targetPath);
-        //        form1.tbSrcFolder_Text = Path.GetFullPath(form1.srcFilePath).Replace(form1.tbSrcFilename_Text, "");
-        //        form1.Url = url;
-        //        form1.Title = title;
-
-        //        form1.LoadFile(true);
-
-        //        form1.chkJustrDoneConversion_Checked = true;
-        //        form1.Text = title + " " + childFormNumber++;
-        //        form1.Show();
-        //        form1.WindowState = FormWindowState.Maximized;
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //    testDialog.Dispose();
-
-
-        //}
 
         private void applyMetaInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1071,6 +842,7 @@ namespace FilterWF
                         TextBox tb = (TextBox)form1.ActiveControl;
                         if (tb != null)
                         {
+                            MessageBox.Show("Sorry, Redo not avaiable.");
                             // Determine if last operation can be undone in text box.   
                             //if (tb.CanUndo == true)
                             //{
@@ -1105,9 +877,7 @@ namespace FilterWF
         {
             frmwebBrowser wb = new frmwebBrowser();
             wb.MdiParent = this;
-            //wb.Text = srcPath + childFormNumber++;
             wb.WindowState = FormWindowState.Maximized;
-            //wb.PathStr = targetPath;
             SetStatus("Busy: Rendering Preview.");
             wb.Show();
         }
