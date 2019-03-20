@@ -13,6 +13,7 @@ The new (DevOps and Azure hosted) site is now at https://davidjones.sportronics.
 
 ## ClickOnce 
 Install directly from [here]{https://appz.sportronics.com.au/publish/publish.htm)
+ [here](https://www.nuget.org/packages/YamlDotNet)
 
 ## With this app you can:
 - Convert a Word document to MD
