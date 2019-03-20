@@ -25,7 +25,7 @@ namespace FilterWF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"Not set\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not set")]
         public string BlogSiteRoot {
             get {
                 return ((string)(this["BlogSiteRoot"]));
@@ -37,7 +37,7 @@ namespace FilterWF.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"Not set\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Not set")]
         public string CBlogSiteRoot {
             get {
                 return ((string)(this["CBlogSiteRoot"]));

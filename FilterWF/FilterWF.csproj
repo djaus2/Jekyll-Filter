@@ -7,25 +7,34 @@
     <ProjectGuid>{06B5A7F3-DE78-4698-A401-333ABCA92D8C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>FilterWF</RootNamespace>
-    <AssemblyName>FilterWF</AssemblyName>
+    <AssemblyName>JekyllFilter</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <Install>false</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <InstallUrl>https://apppub.z26.web.core.windows.net/publish/</InstallUrl>
+    <SupportUrl>https://davidjones.sportronics.com.au</SupportUrl>
+    <ErrorReportUrl>https://davidjones.sportronics.com.au</ErrorReportUrl>
+    <ProductName>JekyllFilter</ProductName>
+    <PublisherName>David Jones</PublisherName>
+    <SuiteName>Sportronics</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,19 +57,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>ACD40EFA3374999B7B869A8251FEF27B0BED9429</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>8571F1FE4505DF143EDA2FA39A6EB285979E665E</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>FilterWF_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>DjausSporronics.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Sportronics 2019 The Land Of Oz.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>functions.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -91,6 +106,7 @@
     <Compile Include="webBrowser.Designer.cs">
       <DependentUpon>webBrowser.cs</DependentUpon>
     </Compile>
+    <Content Include="functions.ico" />
     <EmbeddedResource Include="frmGetURL.resx">
       <DependentUpon>frmGetURL.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,7 +212,6 @@
     <Content Include="bat\httpGetWithCurl.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="DjausSporronics.pfx" />
     <None Include="FilterWF_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -208,6 +223,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Sportronics 2019 The Land Of Oz.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

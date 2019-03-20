@@ -83,20 +83,7 @@ namespace FilterWF
                 frmSettings frmSettings = new frmSettings();
                 frmSettings.ShowDialog();
             }
-/*#if DEBUG
-            blogSiteRoot = Directory.GetParent(WorkingDirectory).Parent.FullName;
-            blogSiteRoot = Path.Combine("..\\..", blogSiteRoot);
-            DirectoryInfo di = new DirectoryInfo(blogSiteRoot);
-            di = (di.Parent).Parent;
-            blogSiteRoot = di.FullName;
 
-
-
-
-#else
-           //string  blogSiteRoot = Environment.GetEnvironmentVariable("BLOGSITEROOT");
-           //blogSiteRoot = Properties.Settings.Default["BlogSiteRoot"]
-#endif*/
             BlogSiteRoot = blogSiteRoot;
             Layouts = new List<string>();
             string layoutsFolder = Path.Combine(BlogSiteRoot, "_layouts");
@@ -129,7 +116,10 @@ namespace FilterWF
             if (Layouts.Count == 0)
                 Layouts.AddRange(new List<string>() { "default", "page" });
 
-            LoadYaml();
+            if (Directory.Exists(BlogSiteRoot))
+            {
+                LoadYaml();
+            }
 
             try
             {
@@ -217,9 +207,7 @@ namespace FilterWF
 
             if (blogSiteRoot == null)
             {
-                //Insert a hard coded path here if needed
-                blogSiteRoot = @"C:\Users\DavidJones\source\repos\DJzBlog";// Path.Combine("..", srcFilePath);
-                //blogSiteRoot = Path.Combine("..", blogSiteRoot);
+                return;
             }
             if (CategorisIn_data)
             {

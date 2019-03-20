@@ -63,6 +63,16 @@ namespace FilterWF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap functions {
+            get {
+                object obj = ResourceManager.GetObject("functions", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap KinectSnapshot_06_37_01 {
             get {
                 object obj = ResourceManager.GetObject("KinectSnapshot-06-37-01", resourceCulture);

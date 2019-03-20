@@ -64,7 +64,6 @@
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.firstItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator77 = new System.Windows.Forms.ToolStripSeparator();
             this.applyFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +99,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -381,7 +381,6 @@
             this.printToolStripMenuItem,
             this.printPreviewToolStripMenuItem,
             this.printSetupToolStripMenuItem,
-            this.firstItemToolStripMenuItem,
             this.toolStripSeparator77,
             this.applyFiltersToolStripMenuItem});
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
@@ -394,7 +393,7 @@
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(356, 38);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(229, 38);
             this.printToolStripMenuItem.Text = "Convert &Word Doc";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.Wrd2MD_Click);
             // 
@@ -403,33 +402,26 @@
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(356, 38);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(229, 38);
             this.printPreviewToolStripMenuItem.Text = "Convert &Html Doc";
             this.printPreviewToolStripMenuItem.Click += new System.EventHandler(this.Html2MD_Click);
             // 
             // printSetupToolStripMenuItem
             // 
             this.printSetupToolStripMenuItem.Name = "printSetupToolStripMenuItem";
-            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(356, 38);
-            this.printSetupToolStripMenuItem.Text = "Download and Convert from @Url Direc Http2MDt";
+            this.printSetupToolStripMenuItem.Size = new System.Drawing.Size(229, 38);
+            this.printSetupToolStripMenuItem.Text = "&Generate from Web Page";
             this.printSetupToolStripMenuItem.Click += new System.EventHandler(this.Http2MD_Click);
-            // 
-            // firstItemToolStripMenuItem
-            // 
-            this.firstItemToolStripMenuItem.Name = "firstItemToolStripMenuItem";
-            this.firstItemToolStripMenuItem.Size = new System.Drawing.Size(356, 38);
-            this.firstItemToolStripMenuItem.Text = "Download then convert &Direct from URL";
-            this.firstItemToolStripMenuItem.Click += new System.EventHandler(this.firstItemToolStripMenuItem_Click);
             // 
             // toolStripSeparator77
             // 
             this.toolStripSeparator77.Name = "toolStripSeparator77";
-            this.toolStripSeparator77.Size = new System.Drawing.Size(353, 6);
+            this.toolStripSeparator77.Size = new System.Drawing.Size(226, 6);
             // 
             // applyFiltersToolStripMenuItem
             // 
             this.applyFiltersToolStripMenuItem.Name = "applyFiltersToolStripMenuItem";
-            this.applyFiltersToolStripMenuItem.Size = new System.Drawing.Size(356, 38);
+            this.applyFiltersToolStripMenuItem.Size = new System.Drawing.Size(229, 38);
             this.applyFiltersToolStripMenuItem.Text = "Apply Filters";
             this.applyFiltersToolStripMenuItem.Click += new System.EventHandler(this.applyFiltersToolStripMenuItem_Click);
             // 
@@ -599,6 +591,7 @@
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripButton,
+            this.toolStripButton1,
             this.openToolStripButton,
             this.saveToolStripButton,
             this.toolStripSeparator1,
@@ -698,6 +691,16 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::FilterWF.Properties.Resources.functions;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Black;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButton1.Text = "Open";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // MDIParent1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -785,7 +788,6 @@
         private System.Windows.Forms.ToolStripMenuItem toggleFilterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem convertToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem firstItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem previewPageToolStripMenuItem;
@@ -793,6 +795,7 @@
         private System.Windows.Forms.ToolStripMenuItem applyMetaInfoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem broswerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsPostToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
