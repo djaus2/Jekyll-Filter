@@ -73,9 +73,7 @@ namespace FilterWF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            //tbSrcFilename.Text = "";
-            //textBox2.Text = "";
+
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.Title = "Select Markdown file to filter";
             fdlg.InitialDirectory = Path.Combine(
@@ -147,10 +145,7 @@ namespace FilterWF
                         if (comboBox1.Items.Contains(layout))
                             comboBox1.SelectedItem = layout;
                     }
-                    //if (post.layout == "postpage")
-                    //    comboBoxPostOrArticle.SelectedIndex = 0;
-                    //else
-                    //    comboBoxPostOrArticle.SelectedIndex = 1;
+                   
 
                     if (!string.IsNullOrEmpty(_post.lang))
                         tbLang.Text = _post.lang;
@@ -460,21 +455,6 @@ namespace FilterWF
             fdlg.FileName = filenameMd + ".md";
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                //string header = "";
-                //if (cbAddHeader.Checked == true)
-                //{
-                //    header = "---\r\n";
-                //    header += "layout: page\r\n";
-                //    if (tbTopic.Text != "")
-                //        header += "title: " + tbTopic.Text + "\r\n";
-                //    if (tbSubTopic.Text != "")
-                //        header += "subtitle: " + tbSubTopic.Text + "\r\n";
-                //    if (CategoriesComboBox.SelectedIndex != -1)
-                //        header += "category: " + cat + "\r\n";
-                //    header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
-                //    header += "---\r\n\r\n";
-                //    File.WriteAllText(fdlg.FileName, header);
-                //}
                 File.WriteAllText( fdlg.FileName, tbOutput.Text);                
             }
         }
@@ -514,21 +494,7 @@ namespace FilterWF
             fdlg.FileName = filenameMd + ".md";
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                //string header = "";
-                //if (cbAddHeader.Checked == true)
-                //{
-                //    header = "---\r\n";
-                //    header += "layout: page\r\n";
-                //    if (tbTopic.Text != "")
-                //        header += "title: " + tbTopic.Text + "\r\n";
-                //    if (tbSubTopic.Text != "")
-                //        header += "subtitle: " + tbSubTopic.Text + "\r\n";
-                //    if (CategoriesComboBox.SelectedIndex != -1)
-                //        header += "category: " + cat + "\r\n";
-                //    header += "date: " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n";
-                //    header += "---\r\n\r\n";
-                //    File.WriteAllText(fdlg.FileName, header);
-                //}
+
                 string content = tbOutput.Text;
 
 
@@ -549,19 +515,6 @@ namespace FilterWF
             File.WriteAllText(filenameMd, tbOutput.Text);
         }
 
-        //private void button5_Click(object sender, EventArgs e)
-        //{
-        //    Form2 fm2 = new Form2();
-        //    fm2.ShowDialog();
-        //}
-
-
-
-        //private void button6_Click(object sender, EventArgs e)
-        //{
-        //    srcFilePath = Path.Combine(tbSrcFolder.Text, tbSrcFilename.Text);
-        //    LoadFile();
-        //}
 
         public void cmdAddCategory_Click(object sender, EventArgs e)
         {
@@ -1037,20 +990,14 @@ namespace FilterWF
         public void AddMetaInfo()
         {
             _post = new Post();
-            string header = "";
+            string frontMatter = "";
             _post.tags = tbTags.Text;
             if (checkBox1.Checked == true)
                 _post.disqus = "1";
             else
                 _post.disqus = "0";
             _post = new Post();
-            //bool isPost = true;
-            //if (comboBoxPostOrArticle.SelectedIndex != -1)
-            //{
-            //    string post = (string) comboBoxPostOrArticle.SelectedItem;
-            //    if (post != "Post")
-            //        isPost = true;
-            //}
+    
             string cat = "";
             if (CategoriesComboBox.SelectedIndex != -1)
             {
@@ -1069,38 +1016,35 @@ namespace FilterWF
             _post.author = tbAuth.Text;
 
 
-            header = "---\r\n";
-            //if (isPost)
-            //    header += "layout: postpage\r\n";
-            //else
-            //    header += "layout: " + page + "\r\n";
-            header += "layout: " + _post.layout + "\r\n";
+            frontMatter = "---\r\n";
+
+            frontMatter += "layout: " + _post.layout + "\r\n";
             if (_post.title != "")
-                header += "title: " + _post.title + "\r\n";
+                frontMatter += "title: " + _post.title + "\r\n";
             if (_post.subtitle != "")
-                header += "subtitle: " + _post.subtitle + "\r\n";
+                frontMatter += "subtitle: " + _post.subtitle + "\r\n";
             if (CategoriesComboBox.SelectedIndex != -1)
-                header += "category: " + _post.category + "\r\n";
+                frontMatter += "category: " + _post.category + "\r\n";
             if (_post.tags != "")
-                header += "tags: " + _post.tags + "\r\n";
-            //if (CategoriesComboBox.SelectedIndex != -1)
+                frontMatter += "tags: " + _post.tags + "\r\n";
+
             
             if (_post.lang != "")
-                header += "lang: " + _post.lang + "\r\n";
+                frontMatter += "lang: " + _post.lang + "\r\n";
 
             if (_post.date != "")
-                header += "date: " + _post.date + "\r\n";
+                frontMatter += "date: " + _post.date + "\r\n";
 
             if (_post.author != "")
-                header += "author: " + _post.author + "\r\n";
+                frontMatter += "author: " + _post.author + "\r\n";
 
             if (_post.disqus=="1")
-                header += "disqus: " + "1" + "\r\n";
+                frontMatter += "disqus: " + "1" + "\r\n";
             else
-                header += "disqus: " + "0" + "\r\n";
-            header += "---\r\n\r\n";
+                frontMatter += "disqus: " + "0" + "\r\n";
+            frontMatter += "---\r\n\r\n";
 
-            tbOutput.Text = header + tbOutput.Text;
+            tbOutput.Text = frontMatter + tbOutput.Text;
             
         }
 
