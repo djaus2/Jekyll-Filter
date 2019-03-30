@@ -101,6 +101,10 @@ namespace FilterWF
                         string newTags = testDialog.Tags;
                         string newSubTopics = testDialog.SubTopics;
                         DateTime newDate = testDialog.Date;
+
+                        string layout = testDialog.layout.ToLower();
+
+                        string excerpt_separator = testDialog.Except_Eeperator;
                         
                         bool isDisqus = testDialog.IsDisqus;
                         bool topicAndSubTopics = testDialog.TopicAndSubTopics;
@@ -140,6 +144,9 @@ namespace FilterWF
                             string subtopic = subTopics[i];
                             if (headingsAndBlurbs)
                             {
+                                //A fix so app doesn't crash (I typed @@ instaed of @@@ once)
+                                if (!subtopic.Contains(subTopicOrHeadingBlurbSep))
+                                    subtopic += subTopicOrHeadingBlurbSep;
                                 string[] headnblurb = subtopic.Split(new string[] { subTopicOrHeadingBlurbSep }, StringSplitOptions.RemoveEmptyEntries);
                                 blurb = subtopic.Substring(headnblurb[0].Length + subTopicOrHeadingBlurbSep.Length);
                                 subtopic = headnblurb[0];
@@ -148,7 +155,7 @@ namespace FilterWF
                             }
 
 
-                            string filename = date.ToString("yyyy-MM-dd") + "-" + CategoryName + "-" + topic + "-" + subTopics[i] + ".md";
+                            string filename = date.ToString("yyyy-MM-dd") + "-" + CategoryName + "-" + topic + "-" + subtopic + ".md";
                             date = date.AddDays(1);
                             filename = filename.Replace(" ", "-");
                             string path = Path.Combine(postslPath, filename);
@@ -165,6 +172,7 @@ namespace FilterWF
                             {
                                 header += "title: " + subtopic + "\r\n";
                             }
+                            header += "layout: " + layout + "\r\n";
                             if (newTags != "")
                                 header += "tags: " + newTags + "\r\n";
                             //if (CategoriesComboBox.SelectedIndex != -1)
@@ -174,8 +182,12 @@ namespace FilterWF
                             else
                                 header += "disqus: " + "0" + "\r\n";
                             header += "date: " + date + "\r\n";
+                            if (excerpt_separator != "")
+                                header += "excerpt_separator: " + excerpt_separator + "\r\n";
                             header += "---\r\n\r\n";
                             header += blurb + "\r\n";
+                            if (excerpt_separator != "")
+                                header += excerpt_separator + "\r\n";
                             using (var writer = new StreamWriter(path))
                             {
                                 writer.Write(header);

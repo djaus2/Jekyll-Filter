@@ -30,6 +30,8 @@ namespace FilterWF
         public string Cat { get { return (string)comboBoxCategories.SelectedItem; } set { comboBoxCategories.SelectedItem = value; } }
         public string Tags { get { return textBox3.Text; } set { textBox3.Text = value; } }
 
+        public string layout { get { return (string)comboBox1.SelectedItem; } set { comboBox1.SelectedItem = (string) value; } }
+
         public string SubTopics { get { return textBox4.Text; } set { textBox4.Text = value; } }
         public DateTime Date { get { return this.dateTimePicker1.Value; } }
 
@@ -37,6 +39,8 @@ namespace FilterWF
         public bool HeadingsAndBlurbs { get { return checkBox3.Checked == true; } set { checkBox3.Checked = value; } }
 
         public string Seperator { get { return tbSeperator.Text; } set { tbSeperator.Text = value; } }
+
+        public string Except_Eeperator { get { return tbExcerptSep.Text; } set { tbExcerptSep.Text = value; } }
 
         private void button1_Click(object sender, EventArgs e)
         {

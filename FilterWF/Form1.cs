@@ -123,6 +123,10 @@ namespace FilterWF
                         tbSubTopic.Text = _post.subtitle;
                     if (_post.tags != null)
                         tbTags.Text = _post.tags;
+                    if (_post.excerpt_separator != null)
+                        tbExcerptSep.Text = _post.excerpt_separator;
+                    else
+                        tbExcerptSep.Text = "";
                     if (_post.category != null)
                     {
                         string cat = _post.category;
@@ -181,6 +185,7 @@ namespace FilterWF
             public string tags { get; set; }
             public string disqus { get; set; }
             public string lang { get; set; }
+            public string excerpt_separator { get; set; }
 
         }
 
@@ -1014,6 +1019,7 @@ namespace FilterWF
             _post.lang = tbLang.Text;
             _post.date = tbDate.Text;
             _post.author = tbAuth.Text;
+            _post.excerpt_separator = tbExcerptSep.Text;
 
 
             frontMatter = "---\r\n";
@@ -1027,10 +1033,11 @@ namespace FilterWF
                 frontMatter += "category: " + _post.category + "\r\n";
             if (_post.tags != "")
                 frontMatter += "tags: " + _post.tags + "\r\n";
-
-            
             if (_post.lang != "")
                 frontMatter += "lang: " + _post.lang + "\r\n";
+
+            if (_post.excerpt_separator != "")
+                frontMatter += "excerpt_separator: " + _post.excerpt_separator + "\r\n";
 
             if (_post.date != "")
                 frontMatter += "date: " + _post.date + "\r\n";

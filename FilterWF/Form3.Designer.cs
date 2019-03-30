@@ -54,6 +54,8 @@
             this.tbSeperator = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.tbExcerptSep = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox3
@@ -172,8 +174,9 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Post/s",
-            "Article/s"});
+            "Post",
+            "Article",
+            "PostPage"});
             this.comboBox1.Location = new System.Drawing.Point(601, 48);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(68, 21);
@@ -311,11 +314,30 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // tbExcerptSep
+            // 
+            this.tbExcerptSep.Location = new System.Drawing.Point(265, 132);
+            this.tbExcerptSep.Name = "tbExcerptSep";
+            this.tbExcerptSep.Size = new System.Drawing.Size(86, 20);
+            this.tbExcerptSep.TabIndex = 53;
+            this.tbExcerptSep.Text = "<!--more-->";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(191, 135);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 13);
+            this.label18.TabIndex = 54;
+            this.label18.Text = "Excerpt Sep:";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 507);
+            this.Controls.Add(this.tbExcerptSep);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label14);
@@ -379,5 +401,7 @@
         private System.Windows.Forms.TextBox tbSeperator;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox tbExcerptSep;
+        private System.Windows.Forms.Label label18;
     }
 }
