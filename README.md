@@ -1,6 +1,8 @@
 # Jekyll Filter
 A Windows Forms app to get web pages and Word documents into a Jekyll Blog site and Markdown. 
 
+[![Build Status](https://dev.azure.com/SportronicsAu/JekyllFilterClickOnce/_apis/build/status/djaus2.Jekyll-Filter?branchName=master)](https://dev.azure.com/SportronicsAu/JekyllFilterClickOnce/_build/latest?definitionId=5&branchName=master)
+
 Needs [Pandoc](http://pandoc.org) to be installed.
 
 Also, uses [YamlDotNet](https://www.nuget.org/packages/YamlDotNet)
