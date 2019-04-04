@@ -31,7 +31,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy "_site" to staging directory'
   inputs:
-    SourceFolder: 'FilterWF\\publish'
+    SourceFolder: 'FilterWF\\app.publish'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
