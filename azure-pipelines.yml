@@ -26,11 +26,12 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    target: publish
 
 - task: CopyFiles@2
   displayName: 'Copy "_site" to staging directory'
   inputs:
-    SourceFolder: 'FilterWF\\bin\\Release'
+    SourceFolder: 'FilterWF\\publish'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
