@@ -31,5 +31,6 @@ steps:
   displayName: 'Copy "_site" to staging directory'
   inputs:
     SourceFolder: 'bin\\release'
+    Contents: ''
     TargetFolder: '$(build.artifactstagingdirectory)'
 
