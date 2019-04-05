@@ -29,7 +29,7 @@ steps:
     msbuildArgs: '/target:publish'
 
 - task: CopyFiles@2
-  displayName: 'Copy "app.publish" to staging directory'
+  displayName: 'Copy "release" to staging directory'
   inputs:
     SourceFolder: 'FilterWF\\bin\\release'
     Contents: '**'
@@ -37,6 +37,6 @@ steps:
 
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact:app.publish'
+  displayName: 'Publish Artifact:release'
   inputs:
     ArtifactName: 'release'
