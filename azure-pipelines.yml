@@ -26,8 +26,12 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    msbuildArgs: '/target:publish'
 
-- task: VSTest@2
+- task: CopyFiles@2
+  displayName: 'Copy "_site" to staging directory'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    SourceFolder: 'FilterWF\\app.publish'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
