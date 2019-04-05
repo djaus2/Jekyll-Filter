@@ -31,7 +31,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy "app.publish" to staging directory'
   inputs:
-    SourceFolder: 'FilterWF\\bin\\release\\app.publish'
+    SourceFolder: 'FilterWF\\bin\\release'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
@@ -39,4 +39,4 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact:app.publish'
   inputs:
-    ArtifactName: 'app.publish'
+    ArtifactName: 'release'
