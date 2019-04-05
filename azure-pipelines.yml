@@ -29,9 +29,14 @@ steps:
     msbuildArgs: '/target:publish'
 
 - task: CopyFiles@2
-  displayName: 'Copy "_site" to staging directory'
+  displayName: 'Copy "app.publish" to staging directory'
   inputs:
     SourceFolder: 'FilterWF\\bin\\release\\app.publish'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact:app.publish'
+  inputs:
+    ArtifactName: 'app.publish'
