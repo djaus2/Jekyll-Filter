@@ -107,6 +107,9 @@
     <Compile Include="webBrowser.Designer.cs">
       <DependentUpon>webBrowser.cs</DependentUpon>
     </Compile>
+    <Content Include="404.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="functions.ico" />
     <Content Include="publish.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
