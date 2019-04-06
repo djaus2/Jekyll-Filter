@@ -107,11 +107,14 @@
     <Compile Include="webBrowser.Designer.cs">
       <DependentUpon>webBrowser.cs</DependentUpon>
     </Compile>
-    <Content Include="404.html">
+    <Content Include="web\404.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="functions.ico" />
-    <Content Include="publish.htm">
+    <Content Include="web\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="web\publish.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="frmGetURL.resx">
