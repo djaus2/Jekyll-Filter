@@ -31,8 +31,8 @@
     <SuiteName>Sportronics</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -108,6 +108,9 @@
       <DependentUpon>webBrowser.cs</DependentUpon>
     </Compile>
     <Content Include="functions.ico" />
+    <Content Include="publish.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="frmGetURL.resx">
       <DependentUpon>frmGetURL.cs</DependentUpon>
     </EmbeddedResource>
