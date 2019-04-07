@@ -31,8 +31,8 @@
     <SuiteName>Sportronics</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -285,4 +285,7 @@
     PublishOnly
   </BuildDependsOn>
   </PropertyGroup>
+  <Target Name="Mytarget" AfterTargets="MSDeployPublish">
+    <Exec Command="@echo AFTER PUB" />
+  </Target>
 </Project>
