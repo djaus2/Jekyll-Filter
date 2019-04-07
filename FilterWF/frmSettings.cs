@@ -70,5 +70,10 @@ namespace FilterWF
             MessageBox.Show("Reset Settings", "You should now restart the app,", MessageBoxButtons.OK);
             this.Close();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
