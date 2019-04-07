@@ -31,9 +31,10 @@
     <SuiteName>Sportronics</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>3.0.0.2</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -284,6 +285,12 @@
     $(BuildDependsOn);
     PublishOnly
   </BuildDependsOn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>@echo on
+if exist  $(ProjectDir)publish\publish.htm (
+copy $(ProjectDir)\publish\publish.htm $(ProjectDir)web /Y
+)</PreBuildEvent>
   </PropertyGroup>
   <Target Name="Mytarget" AfterTargets="MSDeployPublish">
     <Exec Command="@echo AFTER PUB" />
