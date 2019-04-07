@@ -33,21 +33,21 @@ steps:
   inputs:
     SourceFolder: 'FilterWF\\bin\\release\\app.publish'
     Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)\\publish'
+    TargetFolder: '$(build.artifactstagingdirectory)\\_site\\publish'
 
 - task: CopyFiles@2
   displayName: 'Copy "publish.htm" to staging directory'
   inputs:
     SourceFolder: 'FilterWF\\bin\\release\\web'
     Contents: 'publish.htm'
-    TargetFolder: '$(build.artifactstagingdirectory)\\publish'
+    TargetFolder: '$(build.artifactstagingdirectory)\\_site\\publish'
 
 - task: CopyFiles@2
   displayName: 'Copy "*.html" to staging directory'
   inputs:
     SourceFolder: 'FilterWF\\bin\\release\\web'
     Contents: '*.html'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    TargetFolder: '$(build.artifactstagingdirectory)\\_site'
 
 
 - task: PublishBuildArtifacts@1
